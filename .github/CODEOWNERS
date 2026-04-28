@@ -1,0 +1,47 @@
+# Replace the team slugs below with the real teams in the `voltserviceltd`
+# GitHub organization before enabling "Require review from Code Owners".
+#
+# Suggested team split for this repo:
+#   @voltserviceltd/maintainers - release gatekeepers, repo admins
+#   @voltserviceltd/frontend    - Next.js application and shared UI
+#   @voltserviceltd/platform    - CI/CD, hooks, deployment, dependency policy
+#   @voltserviceltd/design      - brand, content, visual direction
+
+# Default owner
+* @voltserviceltd/maintainers
+
+# Repository governance and automation
+/.github/ @voltserviceltd/maintainers @voltserviceltd/platform
+/.github/CODEOWNERS @voltserviceltd/maintainers
+/.github/SECURITY.md @voltserviceltd/maintainers @voltserviceltd/platform
+/.github/workflows/ @voltserviceltd/maintainers @voltserviceltd/platform
+/.githooks/ @voltserviceltd/maintainers @voltserviceltd/platform
+/scripts/git/ @voltserviceltd/maintainers @voltserviceltd/platform
+/.gitignore @voltserviceltd/maintainers @voltserviceltd/platform
+
+# Build, release, and dependency infrastructure
+/package.json @voltserviceltd/maintainers @voltserviceltd/platform
+/package-lock.json @voltserviceltd/maintainers @voltserviceltd/platform
+/next.config.ts @voltserviceltd/maintainers @voltserviceltd/platform
+/eslint.config.mjs @voltserviceltd/maintainers @voltserviceltd/platform
+/tsconfig.json @voltserviceltd/maintainers @voltserviceltd/platform
+/vitest.config.mts @voltserviceltd/maintainers @voltserviceltd/platform
+/vitest.setup.ts @voltserviceltd/maintainers @voltserviceltd/platform
+/postcss.config.mjs @voltserviceltd/maintainers @voltserviceltd/platform
+/components.json @voltserviceltd/maintainers @voltserviceltd/platform
+
+# Next.js app, features, and shared UI
+/src/app/ @voltserviceltd/maintainers @voltserviceltd/frontend
+/src/features/ @voltserviceltd/maintainers @voltserviceltd/frontend @voltserviceltd/design
+/src/shared/ @voltserviceltd/maintainers @voltserviceltd/frontend
+
+# Public brand assets
+/public/ @voltserviceltd/maintainers @voltserviceltd/design
+/public/brand/ @voltserviceltd/maintainers @voltserviceltd/design
+
+# Product and operational docs
+/docs/ @voltserviceltd/maintainers @voltserviceltd/design
+/README.md @voltserviceltd/maintainers @voltserviceltd/design
+/VOLTSERVICE.md @voltserviceltd/maintainers @voltserviceltd/design
+/CONTRIBUTING.md @voltserviceltd/maintainers @voltserviceltd/platform
+/AGENTS.md @voltserviceltd/maintainers

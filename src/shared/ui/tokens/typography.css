@@ -1,0 +1,52 @@
+/* BuildersHub typography tokens (DSTypographyTokens — Editorial mode) */
+/* Editorial: Serif for display/headings, SansSerif for body */
+:root {
+  /* Font families — populated by next/font variables in layout.tsx */
+  --font-display: var(--font-playfair, Georgia, 'Times New Roman', serif);
+  --font-body: var(--font-inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+
+  /* Type scale — font sizes (sp → rem, 1sp ≈ 1px at 16px base) */
+  --text-display: 3.25rem;    /* 52sp */
+  --text-h1: 2rem;            /* 32sp */
+  --text-h2: 1.75rem;         /* 28sp */
+  --text-h3: 1.5rem;          /* 24sp */
+  --text-h4: 1.25rem;         /* 20sp */
+  --text-h5: 1rem;            /* 16sp */
+  --text-label-lg: 1.125rem;  /* 18sp */
+  --text-body-lg: 1rem;       /* 16sp */
+  --text-body-md: 0.9375rem;  /* 15sp */
+  --text-body-sm: 0.8125rem;  /* 13sp */
+  --text-caption: 0.75rem;    /* 12sp */
+  --text-label-md: 0.75rem;   /* 12sp */
+  --text-label-sm: 0.6875rem; /* 11sp */
+
+  /* Line heights (unitless ratio) */
+  --leading-display: 1.154;   /* 60/52 */
+  --leading-h1: 1.188;        /* 38/32 */
+  --leading-h2: 1.214;        /* 34/28 */
+  --leading-h3: 1.25;         /* 30/24 */
+  --leading-h4: 1.35;         /* 27/20 */
+  --leading-h5: 1.375;        /* 22/16 */
+  --leading-label-lg: 1.111;  /* 20/18 */
+  --leading-body-lg: 1.5625;  /* 25/16 */
+  --leading-body-md: 1.533;   /* 23/15 */
+  --leading-body-sm: 1.462;   /* 19/13 */
+  --leading-caption: 1.333;   /* 16/12 */
+  --leading-label-md: 1.417;  /* 17/12 */
+  --leading-label-sm: 1.273;  /* 14/11 */
+
+  /* Letter spacing */
+  --tracking-display: -0.012em;  /* -0.6sp / 52px */
+  --tracking-h1: -0.006em;       /* -0.2sp / 32px */
+  --tracking-normal: 0;
+  --tracking-body: 0.0125em;     /* 0.2sp / 16px */
+  --tracking-caption: 0.025em;   /* 0.3sp / 12px */
+  --tracking-label: 0.017em;     /* 0.2sp / 12px */
+
+  /* Font weights */
+  --weight-black: 900;
+  --weight-bold: 700;
+  --weight-semibold: 600;
+  --weight-medium: 500;
+  --weight-normal: 400;
+}

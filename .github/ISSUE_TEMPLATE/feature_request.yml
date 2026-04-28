@@ -1,0 +1,65 @@
+name: Feature Request
+description: Propose a site improvement or product-story change.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Public site route or metadata
+        - Studio homepage content
+        - Shared UI
+        - Brand/static assets
+        - CI/CD or Git hooks
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What user, brand, or engineering problem does this solve?
+      placeholder: Describe the pain point clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the design, flow, content, or contract you want.
+      placeholder: Include impacted paths, copy changes, UX behavior, or technical expectations.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: List alternatives and tradeoffs.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] New behavior is implemented
+        - [ ] Tests added or updated
+        - [ ] Docs updated if boundaries or commands changed
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies or constraints
+      description: Any external service, deployment, content, asset, or timeline constraints.
+      placeholder: Vercel, DNS, brand asset, analytics, copy approval, or rollout blockers.
+    validations:
+      required: false
