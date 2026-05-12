@@ -1,0 +1,42 @@
+services:
+  voltservice-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: voltservice-web:prod
+    ports:
+      - "8080:8080"
+
+  voltservice-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: voltservice-web:dev
+    ports:
+      - "3000:3000"
+    environment:
+      WATCHPACK_POLLING: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
+            - .next/
+            - out/
+            - coverage/
+        - action: rebuild
+          path: package.json
+        - action: rebuild
+          path: package-lock.json
+
+  voltservice-check:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: voltservice-web:dev
+    command: npm run check
+    profiles:
+      - tools

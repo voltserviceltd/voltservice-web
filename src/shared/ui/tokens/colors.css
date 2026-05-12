@@ -1,113 +1,122 @@
-/* Voltservice color tokens — GitHub-style minimal design system */
-/* Core palette: White #ffffff · Ink Black #00171f · Deep Space Blue #003459 */
+/* Voltservice color tokens — shared brand system */
 
 :root {
   /* ===== BASE ===== */
   --color-white: #ffffff;
-  --color-ink: #00171f;
-  --color-blue-deep: #003459;
+  --color-ink: #101828;
+  --color-blue-deep: #17324d;
+  --color-brand: #4f46e5;
+  --color-brand-strong: #312e81;
+  --color-brand-soft: #e9ecff;
+  --color-teal: #0f766e;
+  --color-amber: #f59e0b;
 
   /* ===== BACKGROUND ===== */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f6f8fa;
-  --color-bg-tertiary: #eef2f6;
+  --color-bg-primary: #fbfaf7;
+  --color-bg-secondary: #f1f5f4;
+  --color-bg-tertiary: #e8eef8;
+  --color-bg-hero: #dff6fb;
 
   /* ===== SURFACE ===== */
   --color-surface-primary: #ffffff;
-  --color-surface-elevated: rgba(255, 255, 255, 0.75);
-  --color-surface-glass: rgba(255, 255, 255, 0.6);
+  --color-surface-elevated: rgba(255, 255, 255, 0.86);
+  --color-surface-glass: rgba(255, 255, 255, 0.72);
+  --color-surface-accent: #eef2ff;
+  --color-surface-warm: #fff7ed;
 
   /* ===== TEXT ===== */
-  --color-text-primary: #00171f;
-  --color-text-secondary: #3b4a54;
-  --color-text-tertiary: #6b7c87;
-  --color-text-muted: #8b98a5;
+  --color-text-primary: #101828;
+  --color-text-secondary: #475467;
+  --color-text-tertiary: #667085;
+  --color-text-muted: #98a2b3;
   --color-text-inverse: #ffffff;
-  --color-text-link: #0969da;
+  --color-text-link: #4f46e5;
 
   /* ===== BORDER ===== */
-  --color-border-subtle: #d8dee4;
-  --color-border-default: #c9d1d9;
-  --color-border-strong: #8c959f;
+  --color-border-subtle: #e4e7ec;
+  --color-border-default: #d0d5dd;
+  --color-border-strong: #98a2b3;
 
-  /* ===== BLUE GLASS ACCENT ===== */
-  --color-accent-blue: #003459;
-  --color-accent-blue-soft: rgba(0, 52, 89, 0.08);
-  --color-accent-blue-border: rgba(0, 52, 89, 0.18);
+  /* ===== ACCENT ===== */
+  --color-accent-blue: #4f46e5;
+  --color-accent-blue-soft: rgba(79, 70, 229, 0.1);
+  --color-accent-blue-border: rgba(79, 70, 229, 0.22);
 
   /* ===== SEMANTIC ===== */
-  --color-success: #2da44e;
-  --color-warning: #d29922;
-  --color-error: #cf222e;
-  --color-info: #0969da;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
 
   /* ===== FILL ===== */
-  --color-fill-hover: #f3f4f6;
-  --color-fill-active: #eaeef2;
-  --color-fill-selected: rgba(0, 52, 89, 0.08);
+  --color-fill-hover: #f2f4f7;
+  --color-fill-active: #eaecf0;
+  --color-fill-selected: rgba(79, 70, 229, 0.1);
 
   /* ===== BUTTON ===== */
-  --color-btn-primary-bg: #00171f;
+  --color-btn-primary-bg: #4f46e5;
   --color-btn-primary-fg: #ffffff;
-  --color-btn-primary-hover: #003459;
+  --color-btn-primary-hover: #4338ca;
 
-  --color-btn-secondary-bg: #f6f8fa;
-  --color-btn-secondary-fg: #00171f;
-  --color-btn-secondary-border: #d0d7de;
+  --color-btn-secondary-bg: #ffffff;
+  --color-btn-secondary-fg: #101828;
+  --color-btn-secondary-border: #d0d5dd;
 
   /* ===== SHADOW / GLASS ===== */
-  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-medium: 0 8px 24px rgba(140, 149, 159, 0.2);
+  --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-medium: 0 18px 44px rgba(16, 24, 40, 0.12);
 
-  --glass-border: 1px solid rgba(0, 52, 89, 0.15);
+  --glass-border: 1px solid rgba(79, 70, 229, 0.16);
 }
 
-/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg-primary: #0d1117;
-    --color-bg-secondary: #161b22;
-    --color-bg-tertiary: #21262d;
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #111827;
+    --color-bg-tertiary: #1e293b;
+    --color-bg-hero: #102a3a;
 
-    --color-surface-primary: #161b22;
-    --color-surface-elevated: rgba(22, 27, 34, 0.9);
-    --color-surface-glass: rgba(22, 27, 34, 0.7);
+    --color-surface-primary: #111827;
+    --color-surface-elevated: rgba(17, 24, 39, 0.9);
+    --color-surface-glass: rgba(17, 24, 39, 0.74);
+    --color-surface-accent: #1e1b4b;
+    --color-surface-warm: #2a1b12;
 
-    --color-text-primary: #e6edf3;
-    --color-text-secondary: #8b949e;
-    --color-text-tertiary: #6e7681;
-    --color-text-muted: #484f58;
-    --color-text-inverse: #0d1117;
-    --color-text-link: #58a6ff;
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #cbd5e1;
+    --color-text-tertiary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-text-inverse: #0f172a;
+    --color-text-link: #a5b4fc;
 
-    --color-border-subtle: #21262d;
-    --color-border-default: #30363d;
-    --color-border-strong: #484f58;
+    --color-border-subtle: #1f2937;
+    --color-border-default: #334155;
+    --color-border-strong: #64748b;
 
-    --color-accent-blue: #58a6ff;
-    --color-accent-blue-soft: rgba(88, 166, 255, 0.08);
-    --color-accent-blue-border: rgba(88, 166, 255, 0.18);
+    --color-accent-blue: #a5b4fc;
+    --color-accent-blue-soft: rgba(165, 180, 252, 0.12);
+    --color-accent-blue-border: rgba(165, 180, 252, 0.24);
 
-    --color-success: #3fb950;
-    --color-warning: #d29922;
-    --color-error: #f85149;
-    --color-info: #58a6ff;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #f87171;
+    --color-info: #60a5fa;
 
-    --color-fill-hover: #1c2128;
-    --color-fill-active: #21262d;
-    --color-fill-selected: rgba(88, 166, 255, 0.08);
+    --color-fill-hover: #1f2937;
+    --color-fill-active: #273449;
+    --color-fill-selected: rgba(165, 180, 252, 0.12);
 
-    --color-btn-primary-bg: #238636;
-    --color-btn-primary-fg: #ffffff;
-    --color-btn-primary-hover: #2ea043;
+    --color-btn-primary-bg: #818cf8;
+    --color-btn-primary-fg: #111827;
+    --color-btn-primary-hover: #a5b4fc;
 
-    --color-btn-secondary-bg: #21262d;
-    --color-btn-secondary-fg: #c9d1d9;
-    --color-btn-secondary-border: #30363d;
+    --color-btn-secondary-bg: #1f2937;
+    --color-btn-secondary-fg: #f8fafc;
+    --color-btn-secondary-border: #334155;
 
-    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.32);
+    --shadow-medium: 0 18px 44px rgba(0, 0, 0, 0.42);
 
-    --glass-border: 1px solid rgba(88, 166, 255, 0.15);
+    --glass-border: 1px solid rgba(165, 180, 252, 0.18);
   }
 }

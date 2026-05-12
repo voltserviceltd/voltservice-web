@@ -34,7 +34,7 @@
   --muted: var(--color-text-tertiary);
   --muted-strong: var(--color-text-secondary);
   --surface-muted: var(--color-bg-secondary);
-  --surface-accent: var(--color-bg-tertiary);
+  --surface-accent: var(--color-surface-accent);
   --surface-strong: var(--color-ink);
   --surface-light: var(--color-white);
   --line-soft: var(--color-border-subtle);

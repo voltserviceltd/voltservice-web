@@ -3,8 +3,9 @@ import { render, screen } from "@testing-library/react";
 import { SiteNavbar } from "./site-navbar";
 
 const items = [
-  { label: "Work", href: "#products" },
-  { label: "Services", href: "#services" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
 ] as const;
 
 describe("SiteNavbar", () => {
@@ -23,7 +24,8 @@ describe("SiteNavbar", () => {
       screen.getByRole("button", { name: /open navigation/i }),
     ).toBeInTheDocument();
 
-    expect(screen.getAllByRole("link", { name: "Work" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Products" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "About" }).length).toBeGreaterThan(0);
     expect(
       screen.getAllByRole("link", { name: /start a project/i })[0],
     ).toHaveAttribute("href", "mailto:voltservice@metalbrain.net");
