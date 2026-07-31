@@ -3,7 +3,7 @@ substitutions:
   _SERVICE: voltservice-web
   _AR_REPOSITORY: voltservice
   # PLACEHOLDER — confirm the real production domain before first deploy.
-  _NEXT_PUBLIC_SITE_URL: https://voltservice.com
+  _NEXT_PUBLIC_SITE_URL: https://metalbrain.net
   _NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ""
 
 steps:

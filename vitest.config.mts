@@ -13,6 +13,9 @@ export default defineConfig({
     environment: "jsdom",
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     setupFiles: ["./vitest.setup.ts"],
+    env: {
+      NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
+    },
     coverage: {
       provider: "v8",
       reporter: ["text", "lcov"],

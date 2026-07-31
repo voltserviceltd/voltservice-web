@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { clientEnv } from "@/lib/env/env";
+import { buildOrganizationJsonLd } from "@/lib/seo/organization-json-ld";
 import "@/styles/globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -37,6 +38,12 @@ export default function RootLayout({
       className={`${ibmPlexSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildOrganizationJsonLd()),
+          }}
+        />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
