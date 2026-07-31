@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Git pre-push hook to run before pushing changes.
+set -euo pipefail
+
+# Run the orchestrator script to check for any issues before pushing.
+bash Scripts/tools/pre_push.sh

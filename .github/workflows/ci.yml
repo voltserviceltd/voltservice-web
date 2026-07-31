@@ -1,0 +1,50 @@
+name: VoltService Web CI
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: voltservice-web-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # env.ts requires this at build time; not a secret (see .env.local.example).
+  NEXT_PUBLIC_SITE_URL: https://metalbrain.net
+
+jobs:
+  quality:
+    name: Lint, Test, Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Cache Next.js build output
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('package.json', 'next.config.*', 'tsconfig.json', 'src/**/*.js', 'src/**/*.jsx', 'src/**/*.ts', 'src/**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run quality gate
+        run: |
+          npm run lint
+          npm test
+          npm run build

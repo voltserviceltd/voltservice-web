@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Git pre-commit hook to run before committing changes.
+set -euo pipefail
+
+# Run the orchestrator script to check for any issues before committing.
+
+bash Scripts/tools/pre_commit.sh

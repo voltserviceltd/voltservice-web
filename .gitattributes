@@ -1,0 +1,8 @@
+# Shell scripts and git hooks must keep LF endings regardless of the
+# checking-out platform's core.autocrlf setting. A CRLF shebang line
+# ("#!/usr/bin/env bash\r") breaks direct execution on Linux (including the
+# ubuntu-latest CI runner and Docker's node:22 image), which is exactly the
+# class of CI-mismatch bug these scripts exist to prevent.
+*.sh text eol=lf
+Scripts/hooks/pre-commit text eol=lf
+Scripts/hooks/pre-push text eol=lf
