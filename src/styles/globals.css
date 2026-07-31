@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/*
+ * Single semantic palette for the whole site (see doc/nextjs-migration-plan.md
+ * — "One theme system from day one"). No second/legacy token set, no
+ * dark-mode variant for v1: the target is a clean, mostly-white B2B site.
+ */
+:root {
+  --color-background: #ffffff;
+  --color-background-subtle: #d9d9d9;
+  --color-surface: #ffffff;
+  --color-surface-inverse: #353535;
+  --color-text-primary: #353535;
+  --color-text-muted: #5c5c5c;
+  --color-text-on-inverse: #ffffff;
+  --color-accent-primary: #284b63;
+  --color-accent-primary-hover: #1c3549;
+  --color-accent-secondary: #3c6e71;
+  --color-border-subtle: #c2c2c2;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-background-subtle: var(--color-background-subtle);
+  --color-surface: var(--color-surface);
+  --color-surface-inverse: var(--color-surface-inverse);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-on-inverse: var(--color-text-on-inverse);
+  --color-accent-primary: var(--color-accent-primary);
+  --color-accent-primary-hover: var(--color-accent-primary-hover);
+  --color-accent-secondary: var(--color-accent-secondary);
+  --color-border-subtle: var(--color-border-subtle);
+
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-display: var(--font-space-grotesk);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
