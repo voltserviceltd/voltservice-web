@@ -1,9 +1,19 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/*
+ ---break---
+ */
+@custom-variant dark (&:is(.dark *));
 
 /*
  * Single semantic palette for the whole site (see doc/nextjs-migration-plan.md
- * — "One theme system from day one"). No second/legacy token set, no
- * dark-mode variant for v1: the target is a clean, mostly-white B2B site.
+ * — "One theme system from day one"), now with a dark variant. shadcn's own
+ * semantic roles (--primary, --secondary, --muted, --accent, --destructive,
+ * --border, --input, --ring, --card, --popover) are defined ONCE below as
+ * references to our brand tokens, not as a second competing palette — only
+ * the brand tokens themselves are overridden in .dark, so both our
+ * hand-rolled components and shadcn's components repaint together.
  */
 :root {
   --color-background: #ffffff;
@@ -17,6 +27,48 @@
   --color-accent-primary-hover: #1c3549;
   --color-accent-secondary: #3c6e71;
   --color-border-subtle: #c2c2c2;
+  /* Subtle hover/highlight tint (shadcn's "accent" role — menu-item hover,
+     not the vivid brand accent) — kept distinct from accent-primary/secondary
+     so hover states don't read as loud brand-colored blocks. */
+  --color-accent-subtle: #eef2f3;
+  --color-destructive: #b3261e;
+
+  --background: var(--color-background);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text-primary);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-accent-primary);
+  --primary-foreground: var(--color-text-on-inverse);
+  --secondary: var(--color-background-subtle);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: var(--color-background-subtle);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-accent-subtle);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: var(--color-destructive);
+  --border: var(--color-border-subtle);
+  --input: var(--color-border-subtle);
+  --ring: var(--color-accent-primary);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --color-background: #18181a;
+  --color-background-subtle: #242426;
+  --color-surface: #202022;
+  --color-surface-inverse: #0d0d0e;
+  --color-text-primary: #ececec;
+  --color-text-muted: #a3a3a3;
+  --color-text-on-inverse: #ffffff;
+  /* Yale Blue/Stormy Teal brightened for sufficient contrast on dark backgrounds. */
+  --color-accent-primary: #4d7ea8;
+  --color-accent-primary-hover: #5f92b8;
+  --color-accent-secondary: #5a9a9d;
+  --color-border-subtle: #3a3a3c;
+  --color-accent-subtle: #22303a;
+  --color-destructive: #ef5350;
 }
 
 @theme inline {
@@ -34,10 +86,51 @@
 
   --font-sans: var(--font-ibm-plex-sans);
   --font-display: var(--font-space-grotesk);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 body {
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
+}
+
+/*
+ ---break---
+ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }

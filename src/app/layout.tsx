@@ -4,6 +4,9 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { clientEnv } from "@/lib/env/env";
 import { buildOrganizationJsonLd } from "@/lib/seo/organization-json-ld";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -35,7 +38,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={cn("h-full", "antialiased", ibmPlexSans.variable, spaceGrotesk.variable)}
     >
       <body className="flex min-h-full flex-col">
         <script
@@ -44,9 +48,17 @@ export default function RootLayout({
             __html: JSON.stringify(buildOrganizationJsonLd()),
           }}
         />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
