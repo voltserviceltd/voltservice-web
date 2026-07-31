@@ -1,0 +1,100 @@
+name: Bug Report
+description: Report a reproducible bug on the VoltService website.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the codebase is affected?
+      options:
+        - Marketing page or content
+        - Contact/inquiry form
+        - SEO, metadata, sitemap, or robots
+        - Shared UI (primitives/marketing/layout components)
+        - Docker or Cloud Run deployment
+        - CI/CD or Git hooks
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Affected path/module
+      description: Example `src/app/...` or `.github/workflows/...`
+      placeholder: src/app/services/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is wrong and why it matters?
+      placeholder: Briefly describe the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What should happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      placeholder: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Use numbered deterministic steps.
+      placeholder: |
+        1. Go to ...
+        2. Resize/click/navigate to ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, device, OS, and build details.
+      placeholder: |
+        - OS:
+        - Browser:
+        - Device/viewport:
+        - Build: local/preview/production
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, screenshots, traces
+      description: Paste relevant errors or captures. Redact secrets.
+      placeholder: Console output, terminal output, screenshots, or traces.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submit checks
+      options:
+        - label: I confirmed this is not a security vulnerability requiring private disclosure.
+          required: true
+        - label: I searched existing issues to avoid duplicates.
+          required: true

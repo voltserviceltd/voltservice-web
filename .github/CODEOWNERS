@@ -1,0 +1,43 @@
+# Code owner
+
+* @MetalHuman38
+
+## Repository governance and automation
+
+/.github/ @MetalHuman38
+/.github/CODEOWNERS @MetalHuman38
+/.github/SECURITY.md @MetalHuman38
+/.github/workflows/ @MetalHuman38
+/Scripts/ @MetalHuman38
+/.gitattributes @MetalHuman38
+/.gitignore @MetalHuman38
+
+## Build, release, and dependency infrastructure
+
+/package.json @MetalHuman38
+/package-lock.json @MetalHuman38
+/next.config.ts @MetalHuman38
+/eslint.config.mjs @MetalHuman38
+/tsconfig.json @MetalHuman38
+/vitest.config.mts @MetalHuman38
+/vitest.setup.ts @MetalHuman38
+/postcss.config.mjs @MetalHuman38
+/Dockerfile @MetalHuman38
+/cloudbuild.yaml @MetalHuman38
+/.dockerignore @MetalHuman38
+
+## Next.js app and shared code
+
+/src/app/ @MetalHuman38
+/src/components/ @MetalHuman38
+/src/lib/ @MetalHuman38
+/src/styles/ @MetalHuman38
+
+## Environment and config
+
+/.env.local.example @MetalHuman38
+
+## Product and operational docs
+
+/README.md @MetalHuman38
+/AGENTS.md @MetalHuman38
