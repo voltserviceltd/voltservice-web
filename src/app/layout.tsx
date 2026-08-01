@@ -23,11 +23,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(clientEnv.siteUrl),
   title: {
-    default: "VoltService Ltd — Custom Software Development",
+    default: "VoltService Ltd — Software Services Built Around Your Business",
     template: "%s — VoltService Ltd",
   },
   description:
-    "VoltService Ltd is a B2B custom software development company, building and operating products including PaySmart and VoltConnect.",
+    "VoltService Ltd designs and develops reliable websites, applications, and digital systems that help businesses improve operations, serve customers, and grow with confidence.",
 };
 
 export default function RootLayout({

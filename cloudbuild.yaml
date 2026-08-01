@@ -1,7 +1,11 @@
 substitutions:
   _REGION: europe-west2
   _SERVICE: voltservice-web
+  # Artifact Registry Docker names use "/" instead of ":" for legacy
+  # domain-scoped project IDs, for example example.com/my-project.
+  _AR_PROJECT_PATH: voltservice-web
   _AR_REPOSITORY: voltservice
+  _RUNTIME_SERVICE_ACCOUNT: voltserviceltd-cloud-run-runti@voltservice-web.iam.gserviceaccount.com
   # PLACEHOLDER — confirm the real production domain before first deploy.
   _NEXT_PUBLIC_SITE_URL: https://metalbrain.net
   _NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ""
@@ -34,7 +38,7 @@ steps:
       - --build-arg
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${_NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       - -t
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
+      - ${_REGION}-docker.pkg.dev/${_AR_PROJECT_PATH}/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
       - .
 
   - id: push-image
@@ -43,7 +47,7 @@ steps:
       - build-image
     args:
       - push
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
+      - ${_REGION}-docker.pkg.dev/${_AR_PROJECT_PATH}/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
 
   - id: deploy-cloud-run
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
@@ -55,17 +59,19 @@ steps:
       - deploy
       - ${_SERVICE}
       - --image
-      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
+      - ${_REGION}-docker.pkg.dev/${_AR_PROJECT_PATH}/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
       - --region
       - ${_REGION}
       - --platform
       - managed
       - --allow-unauthenticated
+      - --service-account
+      - ${_RUNTIME_SERVICE_ACCOUNT}
       - --set-env-vars
       - NODE_ENV=production,NEXT_PUBLIC_SITE_URL=${_NEXT_PUBLIC_SITE_URL},NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${_NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
 images:
-  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
+  - ${_REGION}-docker.pkg.dev/${_AR_PROJECT_PATH}/${_AR_REPOSITORY}/${_SERVICE}:$COMMIT_SHA
 
 options:
   logging: CLOUD_LOGGING_ONLY

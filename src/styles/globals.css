@@ -87,6 +87,9 @@
   --font-sans: var(--font-ibm-plex-sans);
   --font-display: var(--font-space-grotesk);
 
+  /* Nav collapses to the mobile menu below this width (see site-header.tsx). */
+  --breakpoint-nav: 860px;
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);

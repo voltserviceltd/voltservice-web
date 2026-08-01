@@ -1,30 +1,23 @@
 import type { ProjectItem } from "@/lib/content/domain/project-item";
 
-// Ported/adapted from the Flutter site's marketing_content.dart (projectItems).
-// Shared by the Home (top 2) and Projects (all) pages.
+// Shared by the Home (top 2) and Work (all) pages.
+// Framed per the product-mentioning rules: each entry is presented as an
+// example of VoltService's work, not as the company's core identity.
 export const projectItems: ProjectItem[] = [
   {
-    eyebrow: "Featured product",
-    title: "PaySmart growth and merchant control plane",
+    eyebrow: "Example of our work",
+    title: "PaySmart",
     description:
-      "A unified product system spanning acquisition flows, merchant onboarding, dashboard surfaces, and payment-state visibility for a live fintech product on Google Play.",
-    metrics: ["3 launch surfaces", "1 shared design system", "Realtime ops patterns"],
-    tags: ["Fintech", "Merchant ops", "Payments"],
+      "A VoltService-built system for merchant payments, covering onboarding, transaction visibility, and day-to-day account management. This project demonstrates our work in operations, payments, and customer-facing product design.",
+    metrics: ["Merchant onboarding", "Payment tracking", "Live on Google Play"],
+    tags: ["Business application", "Digital systems", "Product development"],
   },
   {
-    eyebrow: "Featured product",
+    eyebrow: "Example of our work",
     title: "VoltConnect",
     description:
-      "A connection and collaboration product shipped on the App Store, built and operated end-to-end by VoltService.",
-    metrics: ["Shipped to App Store", "Operated in production"],
-    tags: ["Mobile", "iOS", "Backend"],
-  },
-  {
-    eyebrow: "Platform delivery",
-    title: "VoltService website relaunch foundation",
-    description:
-      "Repositioned the brand with reusable content modules, SEO-aware metadata, and conversion paths built for future launches.",
-    metrics: ["6 launch-ready surfaces", "Reusable component library", "SEO-aware routing"],
-    tags: ["Marketing", "Next.js", "SEO"],
+      "A VoltService-built connection and collaboration application for individuals and teams, designed, built, and supported end-to-end. This project demonstrates our work in mobile product delivery and ongoing support.",
+    metrics: ["Live on the App Store", "Supported in production"],
+    tags: ["Mobile application", "Product development", "Support and improvement"],
   },
 ];

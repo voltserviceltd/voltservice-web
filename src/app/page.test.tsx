@@ -13,7 +13,7 @@ describe("HomePage", () => {
 
   it("links the primary CTA to /contact", () => {
     render(<HomePage />);
-    const ctaLinks = screen.getAllByRole("link", { name: "Start a Project" });
+    const ctaLinks = screen.getAllByRole("link", { name: "Start a project" });
     expect(ctaLinks.length).toBeGreaterThan(0);
     for (const link of ctaLinks) {
       expect(link).toHaveAttribute("href", "/contact");

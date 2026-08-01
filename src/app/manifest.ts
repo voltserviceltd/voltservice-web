@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "VoltService Ltd",
     short_name: "VoltService",
     description:
-      "VoltService Ltd is a B2B custom software development company.",
+      "VoltService Ltd designs and develops reliable websites, applications, and digital systems for businesses that need practical software support.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

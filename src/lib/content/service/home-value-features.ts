@@ -1,23 +1,23 @@
 import type { FeatureItem } from "@/lib/content/domain/feature-item";
 
-// Ported from the Flutter site's marketing_content.dart (homeValueFeatures).
+// Condensed from the Partner Positioning bullet list — used on the homepage.
 export const homeValueFeatures: FeatureItem[] = [
   {
-    eyebrow: "One operating system",
-    title: "Acquisition, merchant tooling, and mobile delivery aligned early",
+    eyebrow: "Websites",
+    title: "Websites that present your business clearly",
     description:
-      "VoltService structures acquisition surfaces, payment experiences, dashboards, and apps as a single product system instead of separate freelance tracks.",
+      "Clear, professional websites that explain what your business does and help visitors take the next step.",
   },
   {
-    eyebrow: "Trust-first execution",
-    title: "Security and operational control are planned into the surface area",
+    eyebrow: "Applications",
+    title: "Applications that support your workflows",
     description:
-      "Access boundaries, data flow, observability, and launch readiness are designed alongside the UI, which matters for fintech and platform teams.",
+      "Applications that support customers, staff, and the day-to-day workflows your business relies on.",
   },
   {
-    eyebrow: "Reusable growth assets",
-    title: "Design systems and code structures built to scale with growth",
+    eyebrow: "Systems and integrations",
+    title: "Systems that reduce manual work",
     description:
-      "The underlying system can extend into campaigns, product previews, and editorial surfaces without recurring redesign work.",
+      "Internal systems and integrations that reduce manual work, connect your tools and data, and improve visibility.",
   },
 ];

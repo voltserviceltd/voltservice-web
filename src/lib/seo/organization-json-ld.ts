@@ -7,6 +7,6 @@ export function buildOrganizationJsonLd() {
     name: "VoltService Ltd",
     url: clientEnv.siteUrl,
     description:
-      "VoltService Ltd is a B2B custom software development company, building and operating products including PaySmart and VoltConnect.",
+      "VoltService Ltd designs and develops reliable websites, applications, and digital systems that help businesses improve operations, serve customers, and grow with confidence.",
   };
 }

@@ -1,30 +1,26 @@
-// Page-specific copy for "/about" — ported from lib/pages/about_page.dart.
+// Page-specific copy for "/about".
 export const aboutContent = {
   seo: {
-    title: "About | VoltService",
+    title: "About | VOLTSERVICE LTD",
     description:
-      "Learn how VoltService approaches structured marketing systems, product-aware storytelling, and scalable website delivery.",
+      "VOLTSERVICE LTD is a software services company focused on practical digital delivery for businesses.",
     path: "/about",
   },
   header: {
     eyebrow: "About",
-    title:
-      "VoltService operates like a product-minded engineering partner, not a generic delivery shop.",
+    title: "About VOLTSERVICE LTD.",
     description:
-      "Every engagement is structured for clarity, reuse, and long-term growth across marketing, product, and operational surfaces.",
+      "VOLTSERVICE LTD is a software services company focused on practical digital delivery. Founded and led by Babatunde Kalejaiye, we design, build, and support websites, applications, and business systems that help organisations operate more effectively.",
+    secondaryDescription:
+      "Clients work directly with the person responsible for shaping and delivering their software, creating clearer communication, stronger accountability, and solutions that remain maintainable after launch.",
   },
-  operatingModel: [
-    "Lead with the core commercial promise.",
-    "Support complex decisions with clear proof and detail.",
-    "Scale future launches on the same delivery system.",
-  ],
   cta: {
-    title: "Want the same structured thinking applied to your own growth surface or product offer?",
+    title: "Want a practical software partner for your business?",
     description:
-      "Use Contact to outline your priorities, product complexity, and the outcomes that need to move first.",
-    primaryLabel: "Start a Project",
+      "Use Contact to outline your priorities and the outcomes that need to move first. VOLTSERVICE LTD can help shape the idea, plan the right solution, and build software that supports your business properly.",
+    primaryLabel: "Start a project",
     primaryHref: "/contact",
-    secondaryLabel: "See Projects",
-    secondaryHref: "/projects",
+    secondaryLabel: "View our work",
+    secondaryHref: "/work",
   },
 } as const;

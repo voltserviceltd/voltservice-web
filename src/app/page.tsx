@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageSection } from "@/components/primitives/page-section";
 import { SectionHeader } from "@/components/primitives/section-header";
+import { Card } from "@/components/primitives/card";
 import { HeroSection } from "@/components/marketing/hero-section";
 import { FeatureGrid } from "@/components/marketing/feature-grid";
 import { ServiceCard } from "@/components/marketing/service-card";
@@ -9,6 +10,7 @@ import { ProjectCard } from "@/components/marketing/project-card";
 import { CTASection } from "@/components/marketing/cta-section";
 import { homeContent } from "@/lib/content/service/home-content";
 import { homeValueFeatures } from "@/lib/content/service/home-value-features";
+import { approachSteps } from "@/lib/content/service/approach-steps";
 import { serviceItems } from "@/lib/content/service/service-items";
 import { projectItems } from "@/lib/content/service/project-items";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
@@ -52,21 +54,50 @@ export default function HomePage() {
 
       <PageSection>
         <SectionHeader
-          eyebrow={homeContent.projectsSection.eyebrow}
-          title={homeContent.projectsSection.title}
-          description={homeContent.projectsSection.description}
+          eyebrow={homeContent.workSection.eyebrow}
+          title={homeContent.workSection.title}
+          description={homeContent.workSection.description}
           action={
             <Link
-              href={homeContent.projectsSection.actionHref}
+              href={homeContent.workSection.actionHref}
               className="rounded-lg border border-border-subtle px-4 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-background-subtle"
             >
-              {homeContent.projectsSection.actionLabel}
+              {homeContent.workSection.actionLabel}
             </Link>
           }
         />
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {projectItems.slice(0, 2).map((project) => (
             <ProjectCard key={project.title} project={project} />
+          ))}
+        </div>
+      </PageSection>
+
+      <PageSection subtle>
+        <SectionHeader {...homeContent.approachSection} />
+        <div className="mt-8">
+          <FeatureGrid items={approachSteps} />
+        </div>
+      </PageSection>
+
+      <PageSection>
+        <SectionHeader {...homeContent.reliabilitySection} />
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {homeContent.reliabilitySection.bullets.map((point) => (
+            <Card key={point}>
+              <p className="text-sm font-medium text-text-primary">{point}</p>
+            </Card>
+          ))}
+        </div>
+      </PageSection>
+
+      <PageSection subtle>
+        <SectionHeader {...homeContent.whoWeHelpSection} />
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {homeContent.whoWeHelpSection.bullets.map((point) => (
+            <Card key={point}>
+              <p className="text-sm font-medium text-text-primary">{point}</p>
+            </Card>
           ))}
         </div>
       </PageSection>

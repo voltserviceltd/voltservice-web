@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import { PageSection } from "@/components/primitives/page-section";
 import { SectionHeader } from "@/components/primitives/section-header";
-import { FeatureGrid } from "@/components/marketing/feature-grid";
 import { ProjectCard } from "@/components/marketing/project-card";
 import { CTASection } from "@/components/marketing/cta-section";
-import { projectsContent } from "@/lib/content/service/projects-content";
+import { workContent } from "@/lib/content/service/work-content";
 import { projectItems } from "@/lib/content/service/project-items";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = buildPageMetadata(projectsContent.seo);
+export const metadata: Metadata = buildPageMetadata(workContent.seo);
 
-export default function ProjectsPage() {
+export default function WorkPage() {
   return (
     <>
       <PageSection>
-        <SectionHeader {...projectsContent.header} />
+        <SectionHeader {...workContent.header} />
       </PageSection>
 
       <PageSection subtle>
@@ -26,14 +25,7 @@ export default function ProjectsPage() {
       </PageSection>
 
       <PageSection>
-        <SectionHeader {...projectsContent.signalsSection} />
-        <div className="mt-8">
-          <FeatureGrid items={projectsContent.projectSignals} />
-        </div>
-      </PageSection>
-
-      <PageSection>
-        <CTASection {...projectsContent.cta} />
+        <CTASection {...workContent.cta} />
       </PageSection>
     </>
   );

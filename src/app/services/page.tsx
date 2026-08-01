@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageSection } from "@/components/primitives/page-section";
 import { SectionHeader } from "@/components/primitives/section-header";
-import { FeatureGrid } from "@/components/marketing/feature-grid";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { CTASection } from "@/components/marketing/cta-section";
 import { servicesContent } from "@/lib/content/service/services-content";
@@ -22,13 +21,6 @@ export default function ServicesPage() {
           {serviceItems.map((item) => (
             <ServiceCard key={item.title} item={item} />
           ))}
-        </div>
-      </PageSection>
-
-      <PageSection>
-        <SectionHeader {...servicesContent.deliverySection} />
-        <div className="mt-8">
-          <FeatureGrid items={servicesContent.deliveryWorkflow} />
         </div>
       </PageSection>
 

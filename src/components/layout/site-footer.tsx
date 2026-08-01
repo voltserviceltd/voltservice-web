@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { primaryNavRoutes } from "@/lib/router/routes";
+import { contactRoute, primaryNavRoutes } from "@/lib/router/routes";
+
+const footerRoutes = [...primaryNavRoutes, contactRoute];
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -11,13 +13,14 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <p className="font-display text-lg font-semibold">VoltService Ltd</p>
             <p className="mt-2 text-sm text-text-on-inverse/70">
-              Custom software development for B2B teams — including PaySmart
-              and VoltConnect, built and operated by VoltService.
+              VoltService Ltd designs and develops reliable websites,
+              applications, and digital systems for businesses that need
+              practical software support.
             </p>
           </div>
 
           <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {primaryNavRoutes.map((route) => (
+            {footerRoutes.map((route) => (
               <Link
                 key={route.href}
                 href={route.href}

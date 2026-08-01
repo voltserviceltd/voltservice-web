@@ -1,66 +1,65 @@
 import type { ServiceItem } from "@/lib/content/domain/service-item";
 
-// Ported from the Flutter site's marketing_content.dart (serviceItems).
 // Shared by the Home (top 3) and Services (all) pages.
 export const serviceItems: ServiceItem[] = [
   {
-    title: "Marketing and conversion surfaces",
+    title: "Business websites",
     description:
-      "Structured SaaS websites, conversion pages, and launch surfaces that support product credibility and pipeline generation.",
+      "We design and build clear, reliable websites that explain what your business does, help customers take action, and give your company a stronger digital presence.",
     deliverables: [
-      "Homepage and landing page systems",
-      "Structured navigation and page hierarchy",
-      "Conversion-focused content architecture",
+      "Company websites",
+      "Service pages and landing pages",
+      "Booking and enquiry flows",
+      "Content-managed pages",
+      "Performance and accessibility improvements",
     ],
   },
   {
-    title: "Cross-platform product experiences",
+    title: "Web applications",
     description:
-      "Web and mobile products with shared components, consistent motion, and responsive product-grade interaction.",
+      "We build web applications that help businesses manage customers, data, content, workflows, and specialist processes.",
     deliverables: [
-      "Web marketing experiences",
-      "Client and admin application UI systems",
-      "Reusable component systems for future product modules",
+      "Customer portals",
+      "Dashboards and reporting tools",
+      "Booking systems",
+      "Workflow applications",
+      "Admin panels",
     ],
   },
   {
-    title: "Payment and merchant workflows",
+    title: "Digital systems",
     description:
-      "Operational journeys for onboarding, transaction visibility, settlements, and finance-ready merchant interfaces.",
+      "We help businesses replace scattered spreadsheets, manual processes, and disconnected tools with systems that are easier to operate and maintain.",
     deliverables: [
-      "Payment flow orchestration",
-      "Merchant onboarding states and tooling",
-      "Risk and operations visibility patterns",
+      "Internal business tools",
+      "Automation workflows",
+      "Data capture systems",
+      "Operational dashboards",
+      "Role-based access systems",
     ],
   },
   {
-    title: "Platform architecture and APIs",
+    title: "Product development",
     description:
-      "Backend contract design, integration surfaces, and delivery systems that keep web, mobile, and admin products coherent.",
+      "For teams building a digital product, VoltService can support planning, prototyping, development, release, and iteration.",
     deliverables: [
-      "API request and response models",
-      "Platform integration strategies",
-      "Observability and service boundary planning",
+      "MVP planning",
+      "Prototype development",
+      "Application development",
+      "Feature delivery",
+      "Technical roadmaps",
     ],
   },
   {
-    title: "Android, Kotlin, and native systems",
+    title: "Support and improvement",
     description:
-      "Performance-sensitive client systems and native integrations for teams that need platform control beyond a pure web experience.",
+      "Software needs to stay useful after launch. We support existing websites and applications with fixes, improvements, maintenance, and technical guidance.",
     deliverables: [
-      "Native Android feature delivery",
-      "Kotlin integration design",
-      "System bridge planning",
-    ],
-  },
-  {
-    title: "Launch optimization and iteration",
-    description:
-      "Measurement, release readiness, and follow-on improvements once the initial marketing or product surface is live.",
-    deliverables: [
-      "Launch checklists and QA",
-      "Performance and UX refinement",
-      "Roadmap-ready component systems",
+      "Bug fixes",
+      "Feature updates",
+      "Performance improvements",
+      "Hosting and deployment support",
+      "Ongoing support retainers",
     ],
   },
 ];
