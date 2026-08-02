@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
-# Git pre-push hook to run before pushing changes.
+# Lightweight Git pre-push hook.
 set -euo pipefail
 
-# Run the orchestrator script to check for any issues before pushing.
-bash Scripts/tools/pre_push.sh
+# Do not run the full local quality gate here by default. Git opens the push
+# transport before this hook runs, and long lint/build/test checks can leave the
+# SSH connection idle long enough for GitHub to close it before the actual push.
+#
+# Run the full check explicitly before pushing when needed:
+#   bash Scripts/tools/pre_push.sh
+#
+# Or opt in for one push:
+#   RUN_PRE_PUSH_CHECKS=1 git push origin main
+if [[ "${RUN_PRE_PUSH_CHECKS:-0}" == "1" ]]; then
+  bash Scripts/tools/pre_push.sh
+fi

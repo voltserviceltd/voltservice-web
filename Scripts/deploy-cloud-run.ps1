@@ -311,6 +311,8 @@ function Bootstrap-Cloud {
 
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/run.builder"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/run.developer"
+  Bind-ProjectRole "serviceAccount:$BuildSa" "roles/cloudbuild.builds.builder"
+  Bind-ProjectRole "serviceAccount:$BuildSa" "roles/developerconnect.readTokenAccessor"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/artifactregistry.writer"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/logging.logWriter"
 

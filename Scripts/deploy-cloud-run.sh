@@ -184,6 +184,8 @@ bootstrap_cloud() {
 
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/run.builder"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/run.developer"
+  bind_project_role "serviceAccount:${BUILD_SA}" "roles/cloudbuild.builds.builder"
+  bind_project_role "serviceAccount:${BUILD_SA}" "roles/developerconnect.readTokenAccessor"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/artifactregistry.writer"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/logging.logWriter"
 
