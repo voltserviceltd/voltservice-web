@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/field";
 import { Checkbox } from "@/components/ui/checkbox";
 
+
+// Type for props of CheckboxField component, generic over TFieldValues which extends FieldValues from react-hook-form.
 type CheckboxFieldProps<TFieldValues extends FieldValues> = {
   control: Control<TFieldValues>;
   name: FieldPath<TFieldValues>;
