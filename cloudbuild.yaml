@@ -9,6 +9,11 @@ substitutions:
   # PLACEHOLDER — confirm the real production domain before first deploy.
   _NEXT_PUBLIC_SITE_URL: https://metalbrain.net
   _NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ""
+  # Instance bounds for the Cloud Run service (translates to the
+  # autoscaling.knative.dev/minScale and maxScale annotations under the hood).
+  # min=1 keeps one instance warm to avoid cold starts; max=4 caps the bill.
+  _MIN_INSTANCES: "1"
+  _MAX_INSTANCES: "4"
 
 steps:
   - id: run-tests
@@ -67,6 +72,10 @@ steps:
       - --allow-unauthenticated
       - --service-account
       - ${_RUNTIME_SERVICE_ACCOUNT}
+      - --min-instances
+      - ${_MIN_INSTANCES}
+      - --max-instances
+      - ${_MAX_INSTANCES}
       - --set-env-vars
       - NODE_ENV=production,NEXT_PUBLIC_SITE_URL=${_NEXT_PUBLIC_SITE_URL},NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${_NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
