@@ -25,6 +25,8 @@
 #   DEPLOYER_SA=voltserviceltd-cloud-run-deplo@voltservice-web.iam.gserviceaccount.com
 #   NEXT_PUBLIC_SITE_URL=https://metalbrain.net
 #   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
+#   MIN_INSTANCES=1
+#   MAX_INSTANCES=4
 
 set -euo pipefail
 
@@ -36,6 +38,8 @@ SERVICE="${SERVICE:-voltservice-web}"
 AR_REPOSITORY="${AR_REPOSITORY:-voltservice}"
 NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://metalbrain.net}"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY:-}"
+MIN_INSTANCES="${MIN_INSTANCES:-1}"
+MAX_INSTANCES="${MAX_INSTANCES:-4}"
 
 RUNTIME_SA_NAME="${RUNTIME_SA_NAME:-voltserviceltd-cloud-run-runti}"
 BUILD_SA_NAME="${BUILD_SA_NAME:-voltserviceltd-cloud-run-build}"
@@ -116,9 +120,12 @@ bind_project_role() {
   local role="$2"
 
   echo "Ensuring project role: $member -> $role"
+  # --condition=None: required non-interactively once a policy has any
+  # conditional bindings, else gcloud refuses to add an unconditional one.
   gcloud projects add-iam-policy-binding "$PROJECT_ID" \
     --member="$member" \
     --role="$role" \
+    --condition=None \
     --quiet >/dev/null
 }
 
@@ -132,6 +139,7 @@ bind_service_account_role() {
     --member="$member" \
     --role="$role" \
     --project="$PROJECT_ID" \
+    --condition=None \
     --quiet >/dev/null
 }
 
@@ -176,6 +184,8 @@ bootstrap_cloud() {
 
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/run.builder"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/run.developer"
+  bind_project_role "serviceAccount:${BUILD_SA}" "roles/cloudbuild.builds.builder"
+  bind_project_role "serviceAccount:${BUILD_SA}" "roles/developerconnect.readTokenAccessor"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/artifactregistry.writer"
   bind_project_role "serviceAccount:${BUILD_SA}" "roles/logging.logWriter"
 
@@ -189,6 +199,14 @@ bootstrap_cloud() {
   bind_service_account_role "$RUNTIME_SA" "serviceAccount:${BUILD_SA}" "roles/iam.serviceAccountUser"
   bind_service_account_role "$BUILD_SA" "serviceAccount:${DEPLOYER_SA}" "roles/iam.serviceAccountUser"
   bind_service_account_role "$DEPLOYER_SA" "user:${deployer_user}" "roles/iam.serviceAccountTokenCreator"
+
+  # A GitHub-connected Cloud Build trigger runs builds via Cloud Build's own
+  # service agent, not the interactive deployer — so the agent itself needs
+  # permission to act as BUILD_SA, or webhook-triggered builds fail with a
+  # permission error even though manual `gcloud builds submit` runs work fine.
+  bind_service_account_role "$BUILD_SA" \
+    "serviceAccount:service-${PROJECT_NUMBER}@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+    "roles/iam.serviceAccountUser"
 }
 
 deploy_cloud_run() {
@@ -196,7 +214,7 @@ deploy_cloud_run() {
   commit_sha="${COMMIT_SHA:-$(git rev-parse --short=12 HEAD 2>/dev/null || date +%Y%m%d%H%M%S)}"
 
   local substitutions
-  substitutions="COMMIT_SHA=${commit_sha},_REGION=${REGION},_SERVICE=${SERVICE},_AR_PROJECT_PATH=${AR_PROJECT_PATH},_AR_REPOSITORY=${AR_REPOSITORY},_RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SA},_NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL},_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}"
+  substitutions="COMMIT_SHA=${commit_sha},_REGION=${REGION},_SERVICE=${SERVICE},_AR_PROJECT_PATH=${AR_PROJECT_PATH},_AR_REPOSITORY=${AR_REPOSITORY},_RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SA},_NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL},_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY},_MIN_INSTANCES=${MIN_INSTANCES},_MAX_INSTANCES=${MAX_INSTANCES}"
 
   local build_service_account
   build_service_account="projects/${PROJECT_ID}/serviceAccounts/${BUILD_SA}"
@@ -234,6 +252,7 @@ echo "Region: $REGION"
 echo "Service: $SERVICE"
 echo "Artifact Registry project path: $AR_PROJECT_PATH"
 echo "Artifact Registry repository: $AR_REPOSITORY"
+echo "Instance bounds: min=$MIN_INSTANCES max=$MAX_INSTANCES"
 echo "Runtime service account: $RUNTIME_SA"
 echo "Build service account: $BUILD_SA"
 echo "Deployer service account: $DEPLOYER_SA"

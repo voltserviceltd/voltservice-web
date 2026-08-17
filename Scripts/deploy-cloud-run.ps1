@@ -71,6 +71,8 @@ Environment overrides:
   DEPLOYER_SA=voltserviceltd-cloud-run-deplo@voltservice-web.iam.gserviceaccount.com
   NEXT_PUBLIC_SITE_URL=https://metalbrain.net
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
+  MIN_INSTANCES=1
+  MAX_INSTANCES=4
 "@ | Write-Output
   exit 0
 }
@@ -215,10 +217,13 @@ function Bind-ProjectRole {
   )
 
   Write-Host "Ensuring project role: $Member -> $Role"
+  # --condition=None: required non-interactively once a policy has any
+  # conditional bindings, else gcloud refuses to add an unconditional one.
   Invoke-Gcloud @(
     "projects", "add-iam-policy-binding", $ProjectId,
     "--member=$Member",
     "--role=$Role",
+    "--condition=None",
     "--quiet"
   )
 }
@@ -236,6 +241,7 @@ function Bind-ServiceAccountRole {
     "--member=$Member",
     "--role=$Role",
     "--project=$ProjectId",
+    "--condition=None",
     "--quiet"
   )
 }
@@ -305,6 +311,8 @@ function Bootstrap-Cloud {
 
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/run.builder"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/run.developer"
+  Bind-ProjectRole "serviceAccount:$BuildSa" "roles/cloudbuild.builds.builder"
+  Bind-ProjectRole "serviceAccount:$BuildSa" "roles/developerconnect.readTokenAccessor"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/artifactregistry.writer"
   Bind-ProjectRole "serviceAccount:$BuildSa" "roles/logging.logWriter"
 
@@ -318,6 +326,12 @@ function Bootstrap-Cloud {
   Bind-ServiceAccountRole $RuntimeSa "serviceAccount:$BuildSa" "roles/iam.serviceAccountUser"
   Bind-ServiceAccountRole $BuildSa "serviceAccount:$DeployerSa" "roles/iam.serviceAccountUser"
   Bind-ServiceAccountRole $DeployerSa "user:$DeployerUser" "roles/iam.serviceAccountTokenCreator"
+
+  # A GitHub-connected Cloud Build trigger runs builds via Cloud Build's own
+  # service agent, not the interactive deployer — so the agent itself needs
+  # permission to act as BuildSa, or webhook-triggered builds fail with a
+  # permission error even though manual `gcloud builds submit` runs work fine.
+  Bind-ServiceAccountRole $BuildSa "serviceAccount:service-$projectNumber@gcp-sa-cloudbuild.iam.gserviceaccount.com" "roles/iam.serviceAccountUser"
 }
 
 function Get-CommitSha {
@@ -336,7 +350,7 @@ function Get-CommitSha {
 
 function Deploy-CloudRun {
   $commitSha = Get-CommitSha
-  $substitutions = "COMMIT_SHA=$commitSha,_REGION=$Region,_SERVICE=$Service,_AR_PROJECT_PATH=$ArtifactRegistryProjectPath,_AR_REPOSITORY=$ArtifactRepository,_RUNTIME_SERVICE_ACCOUNT=$RuntimeSa,_NEXT_PUBLIC_SITE_URL=$NextPublicSiteUrl,_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NextPublicRecaptchaSiteKey"
+  $substitutions = "COMMIT_SHA=$commitSha,_REGION=$Region,_SERVICE=$Service,_AR_PROJECT_PATH=$ArtifactRegistryProjectPath,_AR_REPOSITORY=$ArtifactRepository,_RUNTIME_SERVICE_ACCOUNT=$RuntimeSa,_NEXT_PUBLIC_SITE_URL=$NextPublicSiteUrl,_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NextPublicRecaptchaSiteKey,_MIN_INSTANCES=$MinInstances,_MAX_INSTANCES=$MaxInstances"
   $buildServiceAccount = "projects/$ProjectId/serviceAccounts/$BuildSa"
 
   $args = @(
@@ -372,6 +386,8 @@ try {
   $ArtifactRepositoryLabels = Get-EnvOrDefault "AR_LABELS" "service=voltservice-web,environment=production,owner=voltservice"
   $NextPublicSiteUrl = Get-EnvOrDefault "NEXT_PUBLIC_SITE_URL" "https://metalbrain.net"
   $NextPublicRecaptchaSiteKey = Get-EnvOrDefault "NEXT_PUBLIC_RECAPTCHA_SITE_KEY" ""
+  $MinInstances = Get-EnvOrDefault "MIN_INSTANCES" "1"
+  $MaxInstances = Get-EnvOrDefault "MAX_INSTANCES" "4"
 
   $RuntimeSaName = Get-EnvOrDefault "RUNTIME_SA_NAME" "voltserviceltd-cloud-run-runti"
   $BuildSaName = Get-EnvOrDefault "BUILD_SA_NAME" "voltserviceltd-cloud-run-build"
@@ -408,6 +424,7 @@ try {
   Write-Host "Artifact Registry project path: $ArtifactRegistryProjectPath"
   Write-Host "Artifact Registry repository: $ArtifactRepository"
   Write-Host "Artifact Registry labels: $ArtifactRepositoryLabels"
+  Write-Host "Instance bounds: min=$MinInstances max=$MaxInstances"
   Write-Host "Runtime service account: $RuntimeSa"
   Write-Host "Build service account: $BuildSa"
   Write-Host "Deployer service account: $DeployerSa"

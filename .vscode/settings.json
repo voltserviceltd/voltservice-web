@@ -2,15 +2,18 @@
     "cSpell.words": [
         "artifactregistry",
         "cloudbuild",
+        "cloudrun",
         "cloudsdktool",
         "deplo",
         "errorlevel",
+        "idempotently",
         "nextjs",
         "Organisations",
         "RECAPTCHA",
         "runti",
         "serviceusage",
         "voltservice",
-        "voltserviceltd"
+        "voltserviceltd",
+        "volzik"
     ]
 }
