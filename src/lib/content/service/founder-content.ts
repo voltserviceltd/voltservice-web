@@ -1,17 +1,22 @@
 import type { StaticImageData } from "next/image";
 import founderAvatar from "@/assets/founder/babatunde-kalejaiye.png";
+import linkedinIcon from "@/assets/social/linkedin.png";
 
 export type FounderLink = {
   label: string;
   href: string;
+  icon?: {
+    src: StaticImageData;
+    alt: string;
+  };
 };
 
 // Internal paths are always valid; external links must be absolute https:// URLs.
-// LinkedIn/GitHub are left out below until real profile URLs are supplied —
-// add them here (not in the presentation components) once available.
 export function isValidFounderLink(href: string): boolean {
   return href.startsWith("/") || href.startsWith("https://");
 }
+
+export const founderLinkedInUrl = "https://www.linkedin.com/in/babatunde-kalejaiye-729248125/";
 
 export const founderContent = {
   name: "Babatunde Kalejaiye",
@@ -32,5 +37,12 @@ export const founderContent = {
       "Clients work directly with me throughout the project, with additional specialists brought in when the work requires them.",
     ],
   },
-  links: [{ label: "Contact", href: "/contact" }] satisfies FounderLink[],
+  links: [
+    {
+      label: "LinkedIn",
+      href: founderLinkedInUrl,
+      icon: { src: linkedinIcon as StaticImageData, alt: "" },
+    },
+    { label: "Contact", href: "/contact" },
+  ] satisfies FounderLink[],
 } as const;

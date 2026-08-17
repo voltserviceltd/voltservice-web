@@ -28,7 +28,7 @@ export function CTASection({
       <div className="mt-6 flex flex-wrap gap-4">
         <Link
           href={primaryHref}
-          className="rounded-lg bg-surface px-5 py-2.5 text-sm font-medium text-accent-primary transition-colors hover:bg-background-subtle"
+          className="rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-accent-primary transition-colors hover:bg-white/90"
         >
           {primaryLabel}
         </Link>

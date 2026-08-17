@@ -1,0 +1,7 @@
+name: organizations/717254206199/policies/run.allowedIngress
+spec:
+  rules:
+  - values:
+      allowedValues:
+      - internal
+      - internal-and-cloud-load-balancing

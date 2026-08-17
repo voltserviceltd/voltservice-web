@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   DialogContent,
@@ -6,6 +7,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { founderContent, isValidFounderLink } from "@/lib/content/service/founder-content";
+import type { FounderLink } from "@/lib/content/service/founder-content";
+
+function FounderLinkIcon({ icon }: { icon: FounderLink["icon"] }) {
+  if (!icon) return null;
+  return <Image src={icon.src} alt={icon.alt} width={16} height={16} className="size-4" />;
+}
 
 export function FounderDetailsDialog() {
   const validLinks = founderContent.links.filter((link) => isValidFounderLink(link.href));
@@ -32,16 +39,18 @@ export function FounderDetailsDialog() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-accent-primary hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary hover:underline"
               >
+                <FounderLinkIcon icon={link.icon} />
                 {link.label}
               </a>
             ) : (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-accent-primary hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary hover:underline"
               >
+                <FounderLinkIcon icon={link.icon} />
                 {link.label}
               </Link>
             ),

@@ -1,5 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { contactRoute, primaryNavRoutes } from "@/lib/router/routes";
+import { founderLinkedInUrl } from "@/lib/content/service/founder-content";
+import linkedinIcon from "@/assets/social/linkedin.png";
 
 const footerRoutes = [...primaryNavRoutes, contactRoute];
 
@@ -19,17 +22,34 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {footerRoutes.map((route) => (
-              <Link
-                key={route.href}
-                href={route.href}
-                className="text-sm text-text-on-inverse/80 transition-colors hover:text-text-on-inverse"
-              >
-                {route.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              {footerRoutes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="text-sm text-text-on-inverse/80 transition-colors hover:text-text-on-inverse"
+                >
+                  {route.label}
+                </Link>
+              ))}
+            </nav>
+
+            <a
+              href={founderLinkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 transition-opacity hover:opacity-100"
+            >
+              <Image
+                src={linkedinIcon}
+                alt="VoltService on LinkedIn"
+                width={20}
+                height={20}
+                className="size-5"
+              />
+            </a>
+          </div>
         </div>
 
         <p className="mt-10 text-xs text-text-on-inverse/60">
