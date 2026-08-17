@@ -14,6 +14,12 @@ substitutions:
   # min=1 keeps one instance warm to avoid cold starts; max=4 caps the bill.
   _MIN_INSTANCES: "1"
   _MAX_INSTANCES: "4"
+  # The org policy constraints/run.allowedIngress (see allowed_ingress_policy.yaml)
+  # only permits "internal" and "internal-and-cloud-load-balancing" — the
+  # default "all" is rejected. This value requires traffic to arrive via a
+  # Cloud Load Balancer (Serverless NEG); the service is not reachable on
+  # its own *.run.app URL until that load balancer exists.
+  _INGRESS: internal-and-cloud-load-balancing
 
 steps:
   - id: run-tests
@@ -76,6 +82,8 @@ steps:
       - ${_MIN_INSTANCES}
       - --max-instances
       - ${_MAX_INSTANCES}
+      - --ingress
+      - ${_INGRESS}
       - --set-env-vars
       - NODE_ENV=production,NEXT_PUBLIC_SITE_URL=${_NEXT_PUBLIC_SITE_URL},NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${_NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 

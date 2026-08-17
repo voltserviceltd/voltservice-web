@@ -27,6 +27,7 @@
 #   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
 #   MIN_INSTANCES=1
 #   MAX_INSTANCES=4
+#   INGRESS=internal-and-cloud-load-balancing
 
 set -euo pipefail
 
@@ -40,6 +41,9 @@ NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://metalbrain.net}"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY:-}"
 MIN_INSTANCES="${MIN_INSTANCES:-1}"
 MAX_INSTANCES="${MAX_INSTANCES:-4}"
+# Must match org policy constraints/run.allowedIngress (allowed_ingress_policy.yaml)
+# — "all" is rejected, so the service is only reachable via a Cloud Load Balancer.
+INGRESS="${INGRESS:-internal-and-cloud-load-balancing}"
 
 RUNTIME_SA_NAME="${RUNTIME_SA_NAME:-voltserviceltd-cloud-run-runti}"
 BUILD_SA_NAME="${BUILD_SA_NAME:-voltserviceltd-cloud-run-build}"
@@ -214,7 +218,7 @@ deploy_cloud_run() {
   commit_sha="${COMMIT_SHA:-$(git rev-parse --short=12 HEAD 2>/dev/null || date +%Y%m%d%H%M%S)}"
 
   local substitutions
-  substitutions="COMMIT_SHA=${commit_sha},_REGION=${REGION},_SERVICE=${SERVICE},_AR_PROJECT_PATH=${AR_PROJECT_PATH},_AR_REPOSITORY=${AR_REPOSITORY},_RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SA},_NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL},_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY},_MIN_INSTANCES=${MIN_INSTANCES},_MAX_INSTANCES=${MAX_INSTANCES}"
+  substitutions="COMMIT_SHA=${commit_sha},_REGION=${REGION},_SERVICE=${SERVICE},_AR_PROJECT_PATH=${AR_PROJECT_PATH},_AR_REPOSITORY=${AR_REPOSITORY},_RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SA},_NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL},_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY},_MIN_INSTANCES=${MIN_INSTANCES},_MAX_INSTANCES=${MAX_INSTANCES},_INGRESS=${INGRESS}"
 
   local build_service_account
   build_service_account="projects/${PROJECT_ID}/serviceAccounts/${BUILD_SA}"
@@ -253,6 +257,7 @@ echo "Service: $SERVICE"
 echo "Artifact Registry project path: $AR_PROJECT_PATH"
 echo "Artifact Registry repository: $AR_REPOSITORY"
 echo "Instance bounds: min=$MIN_INSTANCES max=$MAX_INSTANCES"
+echo "Ingress: $INGRESS"
 echo "Runtime service account: $RUNTIME_SA"
 echo "Build service account: $BUILD_SA"
 echo "Deployer service account: $DEPLOYER_SA"

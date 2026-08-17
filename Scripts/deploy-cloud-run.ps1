@@ -73,6 +73,7 @@ Environment overrides:
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
   MIN_INSTANCES=1
   MAX_INSTANCES=4
+  INGRESS=internal-and-cloud-load-balancing
 "@ | Write-Output
   exit 0
 }
@@ -350,7 +351,7 @@ function Get-CommitSha {
 
 function Deploy-CloudRun {
   $commitSha = Get-CommitSha
-  $substitutions = "COMMIT_SHA=$commitSha,_REGION=$Region,_SERVICE=$Service,_AR_PROJECT_PATH=$ArtifactRegistryProjectPath,_AR_REPOSITORY=$ArtifactRepository,_RUNTIME_SERVICE_ACCOUNT=$RuntimeSa,_NEXT_PUBLIC_SITE_URL=$NextPublicSiteUrl,_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NextPublicRecaptchaSiteKey,_MIN_INSTANCES=$MinInstances,_MAX_INSTANCES=$MaxInstances"
+  $substitutions = "COMMIT_SHA=$commitSha,_REGION=$Region,_SERVICE=$Service,_AR_PROJECT_PATH=$ArtifactRegistryProjectPath,_AR_REPOSITORY=$ArtifactRepository,_RUNTIME_SERVICE_ACCOUNT=$RuntimeSa,_NEXT_PUBLIC_SITE_URL=$NextPublicSiteUrl,_NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NextPublicRecaptchaSiteKey,_MIN_INSTANCES=$MinInstances,_MAX_INSTANCES=$MaxInstances,_INGRESS=$Ingress"
   $buildServiceAccount = "projects/$ProjectId/serviceAccounts/$BuildSa"
 
   $args = @(
@@ -388,6 +389,7 @@ try {
   $NextPublicRecaptchaSiteKey = Get-EnvOrDefault "NEXT_PUBLIC_RECAPTCHA_SITE_KEY" ""
   $MinInstances = Get-EnvOrDefault "MIN_INSTANCES" "1"
   $MaxInstances = Get-EnvOrDefault "MAX_INSTANCES" "4"
+  $Ingress = Get-EnvOrDefault "INGRESS" "internal-and-cloud-load-balancing"
 
   $RuntimeSaName = Get-EnvOrDefault "RUNTIME_SA_NAME" "voltserviceltd-cloud-run-runti"
   $BuildSaName = Get-EnvOrDefault "BUILD_SA_NAME" "voltserviceltd-cloud-run-build"
@@ -425,6 +427,7 @@ try {
   Write-Host "Artifact Registry repository: $ArtifactRepository"
   Write-Host "Artifact Registry labels: $ArtifactRepositoryLabels"
   Write-Host "Instance bounds: min=$MinInstances max=$MaxInstances"
+  Write-Host "Ingress: $Ingress"
   Write-Host "Runtime service account: $RuntimeSa"
   Write-Host "Build service account: $BuildSa"
   Write-Host "Deployer service account: $DeployerSa"
