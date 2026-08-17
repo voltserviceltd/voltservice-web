@@ -1,0 +1,17 @@
+# REJECTED by gcloud — kept for reference so this dead end isn't retried.
+# `gcloud org-policies set-policy` errors with:
+#   INVALID_ARGUMENT: The policy contains invalid list value(s):
+#   [is:allUsers, is:allAuthenticatedUsers]
+# iam.allowedPolicyMemberDomains (Domain Restricted Sharing) does not accept
+# these as allowedValues despite that syntax appearing in some third-party
+# writeups. The actual fix that worked is the separate managed constraint:
+# see run_managed_require_invoker_iam_policy.yaml. This policy was never
+# successfully applied — iam.allowedPolicyMemberDomains itself is untouched.
+name: projects/voltservice-web/policies/iam.allowedPolicyMemberDomains
+spec:
+  rules:
+  - values:
+      allowedValues:
+      - C03q7x9fr
+      - is:allUsers
+      - is:allAuthenticatedUsers

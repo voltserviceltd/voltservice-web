@@ -411,3 +411,7 @@ defaultUrlRedirect:
 finally {
   Pop-Location
 }
+
+
+
+ gcloud compute security-policies rules create 1000 --security-policy voltservice-web-armor-policy --expression "(has(request.headers['next-action']) || has(request.headers['rsc-action-id']) || request.headers['content-type'].contains('multipart/form-data') || request.headers['content-type'].contains('application/x-www-form-urlencoded')) && evaluatePreconfiguredWaf('cve-canary',{'sensitivity': 0, 'opt_in_rule_ids': ['google-mrs-v202512-id000001-rce','google-mrs-v202512-id000002-rce']})" --action=deny-403 --preview --project=voltservice-web
