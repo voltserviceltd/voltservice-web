@@ -69,7 +69,7 @@ Environment overrides:
   RUNTIME_SA=voltserviceltd-cloud-run-runti@voltservice-web.iam.gserviceaccount.com
   BUILD_SA=voltserviceltd-cloud-run-build@voltservice-web.iam.gserviceaccount.com
   DEPLOYER_SA=voltserviceltd-cloud-run-deplo@voltservice-web.iam.gserviceaccount.com
-  NEXT_PUBLIC_SITE_URL=https://metalbrain.net
+  NEXT_PUBLIC_SITE_URL=https://voltserviceltd.metalbrain.net
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
   MIN_INSTANCES=1
   MAX_INSTANCES=4
@@ -385,7 +385,7 @@ try {
   $ArtifactRegistryProjectPath = Get-EnvOrDefault "AR_PROJECT_PATH" (ConvertTo-ArtifactRegistryProjectPath $ProjectId)
   $ArtifactRepositoryDescription = Get-EnvOrDefault "AR_DESCRIPTION" "VoltService Web container images"
   $ArtifactRepositoryLabels = Get-EnvOrDefault "AR_LABELS" "service=voltservice-web,environment=production,owner=voltservice"
-  $NextPublicSiteUrl = Get-EnvOrDefault "NEXT_PUBLIC_SITE_URL" "https://metalbrain.net"
+  $NextPublicSiteUrl = Get-EnvOrDefault "NEXT_PUBLIC_SITE_URL" "https://voltserviceltd.metalbrain.net"
   $NextPublicRecaptchaSiteKey = Get-EnvOrDefault "NEXT_PUBLIC_RECAPTCHA_SITE_KEY" ""
   $MinInstances = Get-EnvOrDefault "MIN_INSTANCES" "1"
   $MaxInstances = Get-EnvOrDefault "MAX_INSTANCES" "4"

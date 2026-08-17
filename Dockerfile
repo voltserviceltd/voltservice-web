@@ -22,7 +22,7 @@ WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-ARG NEXT_PUBLIC_SITE_URL=https://metalbrain.net
+ARG NEXT_PUBLIC_SITE_URL=https://voltserviceltd.metalbrain.net
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
 
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
@@ -48,7 +48,7 @@ FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
-ARG NEXT_PUBLIC_SITE_URL=https://metalbrain.net
+ARG NEXT_PUBLIC_SITE_URL=https://voltserviceltd.metalbrain.net
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
 
 ENV NODE_ENV=production

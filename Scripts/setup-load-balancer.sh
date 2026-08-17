@@ -28,13 +28,13 @@
 # Examples:
 #   Scripts/setup-load-balancer.sh
 #   Scripts/setup-load-balancer.sh --dry-run
-#   DOMAIN=voltservice.metalbrain.net Scripts/setup-load-balancer.sh
+#   DOMAIN=voltserviceltd.metalbrain.net Scripts/setup-load-balancer.sh
 #
 # Environment overrides:
 #   PROJECT_ID=voltservice-web
 #   SERVICE=voltservice-web
 #   REGION=europe-west1          # must match the Cloud Run service's region
-#   DOMAIN=voltservice.metalbrain.net
+#   DOMAIN=voltserviceltd.metalbrain.net
 #   NAME_PREFIX=voltservice-web  # base name for every LB resource created
 
 set -euo pipefail
@@ -44,7 +44,7 @@ cd "$(git rev-parse --show-toplevel)"
 PROJECT_ID="${PROJECT_ID:-voltservice-web}"
 SERVICE="${SERVICE:-voltservice-web}"
 REGION="${REGION:-europe-west1}"
-DOMAIN="${DOMAIN:-voltservice.metalbrain.net}"
+DOMAIN="${DOMAIN:-voltserviceltd.metalbrain.net}"
 NAME_PREFIX="${NAME_PREFIX:-voltservice-web}"
 
 IP_NAME="${NAME_PREFIX}-lb-ip"

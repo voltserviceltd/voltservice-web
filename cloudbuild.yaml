@@ -6,8 +6,9 @@ substitutions:
   _AR_PROJECT_PATH: voltservice-web
   _AR_REPOSITORY: voltservice
   _RUNTIME_SERVICE_ACCOUNT: voltserviceltd-cloud-run-runti@voltservice-web.iam.gserviceaccount.com
-  # PLACEHOLDER — confirm the real production domain before first deploy.
-  _NEXT_PUBLIC_SITE_URL: https://metalbrain.net
+  # The site behind the load balancer at Scripts/setup-load-balancer.sh —
+  # not reachable directly on the Cloud Run *.run.app URL, see _INGRESS below.
+  _NEXT_PUBLIC_SITE_URL: https://voltserviceltd.metalbrain.net
   _NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ""
   # Instance bounds for the Cloud Run service (translates to the
   # autoscaling.knative.dev/minScale and maxScale annotations under the hood).

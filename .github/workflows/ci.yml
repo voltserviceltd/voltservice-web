@@ -16,7 +16,7 @@ permissions:
 
 env:
   # env.ts requires this at build time; not a secret (see .env.local.example).
-  NEXT_PUBLIC_SITE_URL: https://metalbrain.net
+  NEXT_PUBLIC_SITE_URL: https://voltserviceltd.metalbrain.net
 
 jobs:
   quality:

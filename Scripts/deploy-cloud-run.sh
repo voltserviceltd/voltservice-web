@@ -23,7 +23,7 @@
 #   RUNTIME_SA=voltserviceltd-cloud-run-runti@voltservice-web.iam.gserviceaccount.com
 #   BUILD_SA=voltserviceltd-cloud-run-build@voltservice-web.iam.gserviceaccount.com
 #   DEPLOYER_SA=voltserviceltd-cloud-run-deplo@voltservice-web.iam.gserviceaccount.com
-#   NEXT_PUBLIC_SITE_URL=https://metalbrain.net
+#   NEXT_PUBLIC_SITE_URL=https://voltserviceltd.metalbrain.net
 #   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
 #   MIN_INSTANCES=1
 #   MAX_INSTANCES=4
@@ -37,7 +37,7 @@ PROJECT_ID="${PROJECT_ID:-voltservice-web}"
 REGION="${REGION:-europe-west1}"
 SERVICE="${SERVICE:-voltservice-web}"
 AR_REPOSITORY="${AR_REPOSITORY:-voltservice}"
-NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://metalbrain.net}"
+NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://voltserviceltd.metalbrain.net}"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY="${NEXT_PUBLIC_RECAPTCHA_SITE_KEY:-}"
 MIN_INSTANCES="${MIN_INSTANCES:-1}"
 MAX_INSTANCES="${MAX_INSTANCES:-4}"

@@ -58,7 +58,7 @@ Environment overrides:
   PROJECT_ID=voltservice-web
   SERVICE=voltservice-web
   REGION=europe-west1
-  DOMAIN=voltservice.metalbrain.net
+  DOMAIN=voltserviceltd.metalbrain.net
   NAME_PREFIX=voltservice-web
 "@ | Write-Output
   exit 0
@@ -173,7 +173,7 @@ try {
   $ProjectId = Get-EnvOrDefault "PROJECT_ID" "voltservice-web"
   $Service = Get-EnvOrDefault "SERVICE" "voltservice-web"
   $Region = Get-EnvOrDefault "REGION" "europe-west1"
-  $Domain = Get-EnvOrDefault "DOMAIN" "voltservice.metalbrain.net"
+  $Domain = Get-EnvOrDefault "DOMAIN" "voltserviceltd.metalbrain.net"
   $NamePrefix = Get-EnvOrDefault "NAME_PREFIX" "voltservice-web"
 
   $IpName = "$NamePrefix-lb-ip"
