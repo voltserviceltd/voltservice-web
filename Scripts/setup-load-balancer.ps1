@@ -415,3 +415,18 @@ finally {
 
 
  gcloud compute security-policies rules create 1000 --security-policy voltservice-web-armor-policy --expression "(has(request.headers['next-action']) || has(request.headers['rsc-action-id']) || request.headers['content-type'].contains('multipart/form-data') || request.headers['content-type'].contains('application/x-www-form-urlencoded')) && evaluatePreconfiguredWaf('cve-canary',{'sensitivity': 0, 'opt_in_rule_ids': ['google-mrs-v202512-id000001-rce','google-mrs-v202512-id000002-rce']})" --action=deny-403 --preview --project=voltservice-web
+
+
+gcloud run services add-iam-policy-binding voltservice-web --project=voltservice-web --region=europe-west1 --member="allUsers" --role="roles/run.invoker"
+
+gcloud run services add-iam-policy-binding voltservice-web --project=voltservice-web --region=europe-west1 --member="allUsers" --role="roles/run.invoker"
+
+
+gcloud compute security-policies rules update 1000 --security-policy voltservice-web-armor-policy --no-preview --project=voltservice-web
+
+gcloud compute security-policies rules create 1000 --security-policy voltservice-web-armor-policy --expression "(has(request.headers['next-action']) || has(request.headers['rsc-action-id']) || request.headers['content-type'].contains('multipart/form-data') || request.headers['content-type'].contains('application/x-www-form-urlencoded')) && evaluatePreconfiguredWaf('cve-canary',{'sensitivity': 0, 'opt_in_rule_ids': ['google-mrs-v202512-id000001-rce','google-mrs-v202512-id000002-rce']})" --action=deny-403 --project=voltservice-web
+
+
+gcloud compute security-policies rules create 1100 --security-policy voltservice-web-armor-policy --expression "request.path.matches('(?i)(\\.php$|/wp-login|/wp-admin|/wp-content|/wp-includes|/wp-json|/xmlrpc\\.php|/phpmyadmin|/pma/|/\\.env$|/wp-config)')" --action=deny-404 --project=voltservice-web
+
+gcloud compute security-policies rules create 1100 --security-policy voltservice-web-armor-policy --expression "request.path.matches('(?i)(?:\\.php$|/wp-login|/wp-admin|/wp-content|/wp-includes|/wp-json|/xmlrpc\\.php|/phpmyadmin|/pma/|/\\.env$|/wp-config)')" --action=deny-404 --project=voltservice-web
