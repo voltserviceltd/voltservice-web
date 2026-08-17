@@ -16,7 +16,7 @@
 #
 # Environment overrides:
 #   PROJECT_ID=voltservice-web
-#   REGION=europe-west2
+#   REGION=europe-west1
 #   SERVICE=voltservice-web
 #   AR_PROJECT_PATH=voltservice-web
 #   AR_REPOSITORY=voltservice
@@ -33,7 +33,7 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 PROJECT_ID="${PROJECT_ID:-voltservice-web}"
-REGION="${REGION:-europe-west2}"
+REGION="${REGION:-europe-west1}"
 SERVICE="${SERVICE:-voltservice-web}"
 AR_REPOSITORY="${AR_REPOSITORY:-voltservice}"
 NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://metalbrain.net}"

@@ -26,10 +26,18 @@ connection + repository resource.
 If a trigger already exists under a DIFFERENT name (for example, one
 auto-created by the Cloud Run console's "Continuously deploy" wizard), this
 script will not find it - list existing triggers/connections first:
-  gcloud builds triggers list --region=europe-west2 --project=voltservice-web
-  gcloud builds connections list --region=europe-west2 --project=voltservice-web
+  gcloud builds triggers list --region=europe-west1 --project=voltservice-web
+  gcloud builds connections list --region=europe-west1 --project=voltservice-web
 then either set TRIGGER_NAME=<that name> to repair it in place, or delete
 the misconfigured one and let this script create a clean one.
+
+CONNECTION_NAME has no default: 2nd-gen GitHub connections are regional
+resources, so the europe-west2 connection from the earlier region cannot be
+reused here - a new connection must exist in europe-west1 first (Cloud
+Console -> Cloud Build -> Repositories -> Manage connections -> Create host
+connection, region europe-west1; or gcloud builds connections create
+github, which can reuse an already-installed GitHub App without redoing
+the OAuth flow).
 
 .PARAMETER DryRun
 Print what would happen (create or update) without calling gcloud to change anything.
@@ -63,10 +71,10 @@ Usage:
 
 Environment overrides:
   PROJECT_ID=voltservice-web
-  REGION=europe-west2
+  REGION=europe-west1
   REPO_OWNER=voltserviceltd
   REPO_NAME=voltservice-web
-  CONNECTION_NAME=cloudrun-voltservice-web-git-europe-west2-voltserviceltd-volzik
+  CONNECTION_NAME=            # required - name of the europe-west1 GitHub connection
   BUILD_SERVICE_ACCOUNT=voltserviceltd-cloud-run-build@voltservice-web.iam.gserviceaccount.com
   TRIGGER_NAME=voltservice-web-main
   BRANCH_PATTERN=^main$
@@ -156,10 +164,10 @@ Push-Location $repoRoot
 
 try {
   $ProjectId = Get-EnvOrDefault "PROJECT_ID" "voltservice-web"
-  $Region = Get-EnvOrDefault "REGION" "europe-west2"
+  $Region = Get-EnvOrDefault "REGION" "europe-west1"
   $RepoOwner = Get-EnvOrDefault "REPO_OWNER" "voltserviceltd"
   $RepoName = Get-EnvOrDefault "REPO_NAME" "voltservice-web"
-  $ConnectionName = Get-EnvOrDefault "CONNECTION_NAME" "cloudrun-voltservice-web-git-europe-west2-voltserviceltd-volzik"
+  $ConnectionName = Get-EnvOrDefault "CONNECTION_NAME" ""
   $BuildServiceAccount = Get-EnvOrDefault "BUILD_SERVICE_ACCOUNT" "voltserviceltd-cloud-run-build@$ProjectId.iam.gserviceaccount.com"
   $TriggerName = Get-EnvOrDefault "TRIGGER_NAME" "$RepoName-main"
   $BranchPattern = Get-EnvOrDefault "BRANCH_PATTERN" "^main$"

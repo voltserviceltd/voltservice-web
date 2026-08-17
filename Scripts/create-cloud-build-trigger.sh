@@ -22,22 +22,30 @@
 # If a trigger already exists under a DIFFERENT name (for example, one
 # auto-created by the Cloud Run console's "Continuously deploy" wizard),
 # this script will not find it — list existing triggers/connections first:
-#   gcloud builds triggers list --region=europe-west2 --project=voltservice-web
-#   gcloud builds connections list --region=europe-west2 --project=voltservice-web
+#   gcloud builds triggers list --region=europe-west1 --project=voltservice-web
+#   gcloud builds connections list --region=europe-west1 --project=voltservice-web
 # then either pass TRIGGER_NAME=<that name> here to repair it in place, or
 # delete the misconfigured one and let this script create a clean one.
 #
+# CONNECTION_NAME has no default: 2nd-gen GitHub connections are regional
+# resources, so the europe-west2 connection from the earlier region cannot
+# be reused here — a new connection must exist in europe-west1 first (Cloud
+# Console → Cloud Build → Repositories → Manage connections → Create host
+# connection, region europe-west1; or gcloud builds connections create
+# github, which can reuse an already-installed GitHub App without redoing
+# the OAuth flow).
+#
 # Examples:
-#   Scripts/create-cloud-build-trigger.sh
+#   CONNECTION_NAME=<europe-west1-connection> Scripts/create-cloud-build-trigger.sh
 #   Scripts/create-cloud-build-trigger.sh --dry-run
 #   TRIGGER_NAME=<existing-name> Scripts/create-cloud-build-trigger.sh
 #
 # Environment overrides:
 #   PROJECT_ID=voltservice-web
-#   REGION=europe-west2
+#   REGION=europe-west1
 #   REPO_OWNER=voltserviceltd
 #   REPO_NAME=voltservice-web
-#   CONNECTION_NAME=cloudrun-voltservice-web-git-europe-west2-voltserviceltd-volzik
+#   CONNECTION_NAME=            # required — name of the europe-west1 GitHub connection
 #   BUILD_SERVICE_ACCOUNT=voltserviceltd-cloud-run-build@voltservice-web.iam.gserviceaccount.com
 #   TRIGGER_NAME=voltservice-web-main
 #   BRANCH_PATTERN=^main$
@@ -48,10 +56,10 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 PROJECT_ID="${PROJECT_ID:-voltservice-web}"
-REGION="${REGION:-europe-west2}"
+REGION="${REGION:-europe-west1}"
 REPO_OWNER="${REPO_OWNER:-voltserviceltd}"
 REPO_NAME="${REPO_NAME:-voltservice-web}"
-CONNECTION_NAME="${CONNECTION_NAME:-cloudrun-voltservice-web-git-europe-west2-voltserviceltd-volzik}"
+CONNECTION_NAME="${CONNECTION_NAME:-}"
 BUILD_SERVICE_ACCOUNT="${BUILD_SERVICE_ACCOUNT:-voltserviceltd-cloud-run-build@${PROJECT_ID}.iam.gserviceaccount.com}"
 TRIGGER_NAME="${TRIGGER_NAME:-${REPO_NAME}-main}"
 BRANCH_PATTERN="${BRANCH_PATTERN:-^main$}"

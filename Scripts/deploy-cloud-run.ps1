@@ -60,7 +60,7 @@ Usage:
 
 Environment overrides:
   PROJECT_ID=voltservice-web
-  REGION=europe-west2
+  REGION=europe-west1
   SERVICE=voltservice-web
   AR_PROJECT_PATH=voltservice-web
   AR_REPOSITORY=voltservice
@@ -378,7 +378,7 @@ Push-Location $repoRoot
 
 try {
   $ProjectId = Get-EnvOrDefault "PROJECT_ID" "voltservice-web"
-  $Region = Get-EnvOrDefault "REGION" "europe-west2"
+  $Region = Get-EnvOrDefault "REGION" "europe-west1"
   $Service = Get-EnvOrDefault "SERVICE" "voltservice-web"
   $ArtifactRepository = Get-EnvOrDefault "AR_REPOSITORY" "voltservice"
   $ArtifactRegistryProjectPath = Get-EnvOrDefault "AR_PROJECT_PATH" (ConvertTo-ArtifactRegistryProjectPath $ProjectId)
