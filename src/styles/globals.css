@@ -122,6 +122,33 @@ body {
   font-family: var(--font-sans);
 }
 
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  transform: translateY(calc(-100% - 1rem));
+  border-radius: var(--radius);
+  background: var(--color-accent-primary);
+  color: var(--color-text-on-inverse);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 150ms ease-in-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
 /*
  ---break---
  */
