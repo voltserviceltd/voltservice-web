@@ -7,31 +7,58 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Single semantic palette for the whole site (see doc/nextjs-migration-plan.md
- * — "One theme system from day one"), now with a dark variant. shadcn's own
- * semantic roles (--primary, --secondary, --muted, --accent, --destructive,
- * --border, --input, --ring, --card, --popover) are defined ONCE below as
- * references to our brand tokens, not as a second competing palette — only
- * the brand tokens themselves are overridden in .dark, so both our
- * hand-rolled components and shadcn's components repaint together.
+ * Single semantic palette for the whole site, with a dark variant. The brand
+ * tokens follow the VoltService redesign (Figma "VOLTSERVICE website redesign"):
+ * warm paper, ink outlines, hard offset shadows and bright accents.
+ *
+ * shadcn's own semantic roles are defined ONCE below as references to these
+ * tokens; only the brand tokens are overridden in .dark, so hand-rolled and
+ * shadcn components repaint together.
+ *
+ * Contrast rule: text on volt, coral, mint, lilac and pink is always ink (in
+ * both themes). Text on blue is white.
  */
 :root {
-  --color-background: #ffffff;
-  --color-background-subtle: #d9d9d9;
+  /* Fixed brand accents (same in both themes) */
+  --color-ink: #15120e;
+  --color-paper: #fff7e8;
+  --color-volt: #ffd60a;
+  --color-coral: #ff5b2e;
+  --color-blue: #2f5bff;
+  --color-mint: #18c29c;
+  --color-lilac: #c9b6ff;
+  --color-pink: #ff9ed8;
+
+  /* Themeable semantic tokens */
+  --color-background: #fff7e8;
+  --color-background-subtle: #ffebc7;
   --color-surface: #ffffff;
-  --color-surface-inverse: #353535;
-  --color-text-primary: #353535;
-  --color-text-muted: #5c5c5c;
-  --color-text-on-inverse: #ffffff;
-  --color-accent-primary: #284b63;
-  --color-accent-primary-hover: #1c3549;
-  --color-accent-secondary: #3c6e71;
-  --color-border-subtle: #c2c2c2;
-  /* Subtle hover/highlight tint (shadcn's "accent" role — menu-item hover,
-     not the vivid brand accent) — kept distinct from accent-primary/secondary
-     so hover states don't read as loud brand-colored blocks. */
-  --color-accent-subtle: #eef2f3;
-  --color-destructive: #b3261e;
+  --color-surface-inverse: #15120e;
+  --color-text-primary: #15120e;
+  --color-text-muted: #4a4339;
+  --color-text-on-inverse: #fff7e8;
+  --color-accent-primary: #2f5bff;
+  --color-accent-primary-hover: #2449d6;
+  --color-accent-secondary: #18c29c;
+  --color-border-subtle: rgb(21 18 14 / 0.16);
+  /* Outlines and hard shadows: the "sticker" edge. */
+  --color-line: #15120e;
+  --color-accent-subtle: #ffebc7;
+  --color-destructive: #c2410c;
+
+  --shadow-hard-sm: 3px 3px 0 var(--color-line);
+  --shadow-hard: 6px 6px 0 var(--color-line);
+  --shadow-hard-lg: 10px 10px 0 var(--color-line);
+
+  /* Motion (see Figma "Motion spec") */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --duration-reveal: 600ms;
+  --duration-stagger: 80ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --background: var(--color-background);
   --foreground: var(--color-text-primary);
@@ -39,8 +66,8 @@
   --card-foreground: var(--color-text-primary);
   --popover: var(--color-surface);
   --popover-foreground: var(--color-text-primary);
-  --primary: var(--color-accent-primary);
-  --primary-foreground: var(--color-text-on-inverse);
+  --primary: var(--color-volt);
+  --primary-foreground: var(--color-ink);
   --secondary: var(--color-background-subtle);
   --secondary-foreground: var(--color-text-primary);
   --muted: var(--color-background-subtle);
@@ -49,26 +76,36 @@
   --accent-foreground: var(--color-text-primary);
   --destructive: var(--color-destructive);
   --border: var(--color-border-subtle);
-  --input: var(--color-border-subtle);
+  --input: var(--color-line);
   --ring: var(--color-accent-primary);
-  --radius: 0.5rem;
+  --radius: 1rem;
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: linear(
+      0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%, 0.938 16.7%, 1.017 19.4%,
+      1.067, 1.099 24.3%, 1.108 26%, 1.1 28.4%, 1.064 33.1%, 1.012 38.5%,
+      0.991 43.1%, 0.986 47.7%, 1.001 63.6%, 1
+    );
+  }
 }
 
 .dark {
-  --color-background: #18181a;
-  --color-background-subtle: #242426;
-  --color-surface: #202022;
-  --color-surface-inverse: #0d0d0e;
-  --color-text-primary: #ececec;
-  --color-text-muted: #a3a3a3;
-  --color-text-on-inverse: #ffffff;
-  /* Yale Blue/Stormy Teal brightened for sufficient contrast on dark backgrounds. */
-  --color-accent-primary: #4d7ea8;
-  --color-accent-primary-hover: #5f92b8;
-  --color-accent-secondary: #5a9a9d;
-  --color-border-subtle: #3a3a3c;
-  --color-accent-subtle: #22303a;
-  --color-destructive: #ef5350;
+  --color-background: #15120e;
+  --color-background-subtle: #211c16;
+  --color-surface: #1d1913;
+  --color-surface-inverse: #0b0907;
+  --color-text-primary: #fff7e8;
+  --color-text-muted: #d8ccb8;
+  --color-text-on-inverse: #fff7e8;
+  --color-accent-primary: #8aa4ff;
+  --color-accent-primary-hover: #a9bcff;
+  --color-accent-secondary: #18c29c;
+  --color-border-subtle: rgb(255 247 232 / 0.18);
+  --color-line: #fff7e8;
+  --color-accent-subtle: #2a241c;
+  --color-destructive: #ff8a65;
 }
 
 @theme inline {
@@ -83,9 +120,23 @@
   --color-accent-primary-hover: var(--color-accent-primary-hover);
   --color-accent-secondary: var(--color-accent-secondary);
   --color-border-subtle: var(--color-border-subtle);
+  --color-line: var(--color-line);
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-volt: var(--color-volt);
+  --color-coral: var(--color-coral);
+  --color-blue: var(--color-blue);
+  --color-mint: var(--color-mint);
+  --color-lilac: var(--color-lilac);
+  --color-pink: var(--color-pink);
 
-  --font-sans: var(--font-ibm-plex-sans);
-  --font-display: var(--font-space-grotesk);
+  --shadow-hard-sm: var(--shadow-hard-sm);
+  --shadow-hard: var(--shadow-hard);
+  --shadow-hard-lg: var(--shadow-hard-lg);
+
+  --font-sans: var(--font-instrument-sans);
+  --font-display: var(--font-bricolage-grotesque);
+  --font-mono: var(--font-jetbrains-mono);
 
   /* Nav collapses to the mobile menu below this width (see site-header.tsx). */
   --breakpoint-nav: 860px;
@@ -110,10 +161,10 @@
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2.25);
+  --radius-3xl: calc(var(--radius) * 2.5);
+  --radius-4xl: calc(var(--radius) * 3);
 }
 
 body {
@@ -122,30 +173,216 @@ body {
   font-family: var(--font-sans);
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-volt);
+  color: var(--color-ink);
+}
+
 .skip-link {
   position: absolute;
   top: 1rem;
   left: 1rem;
   z-index: 100;
-  padding: 0.75rem 1rem;
-  transform: translateY(calc(-100% - 1rem));
-  border-radius: var(--radius);
-  background: var(--color-accent-primary);
-  color: var(--color-text-on-inverse);
+  padding: 0.75rem 1.25rem;
+  transform: translateY(calc(-100% - 2rem));
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+  background: var(--color-volt);
+  color: var(--color-ink);
   font-weight: 600;
   text-decoration: none;
+  box-shadow: 3px 3px 0 var(--color-ink);
   transition: transform 150ms ease-in-out;
 }
 
 .skip-link:focus {
   transform: translateY(0);
-  outline: 2px solid var(--color-text-primary);
+  outline: 3px solid var(--color-blue);
   outline-offset: 2px;
+}
+
+/* ---------- The "sticker" interaction: buttons, cards, chips ---------- */
+@layer components {
+  .sticker {
+    transition:
+      translate var(--duration-fast) var(--ease-out-expo),
+      box-shadow var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .sticker:hover {
+    translate: -2px -2px;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .sticker:active {
+    translate: 3px 3px;
+    box-shadow: 0 0 0 var(--color-line);
+    transition-duration: 80ms;
+  }
+
+  /* Cards lift a little further; icon tiles inside tilt. */
+  .lift {
+    transition:
+      transform var(--duration-base) var(--ease-out-expo),
+      box-shadow var(--duration-base) var(--ease-out-expo);
+  }
+
+  .lift:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--shadow-hard-lg);
+  }
+
+  .lift:hover [data-tile] {
+    rotate: -6deg;
+  }
+}
+
+/* ---------- Motion ---------- */
+@keyframes vs-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes vs-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes vs-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes vs-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes vs-pop {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+    rotate: 0deg;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    rotate: var(--pop-rotate, 0deg);
+  }
+}
+
+@keyframes vs-rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes vs-fill {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes vs-wiggle {
+  0%,
+  100% {
+    rotate: -6deg;
+  }
+  33% {
+    rotate: 6deg;
+  }
+  66% {
+    rotate: -3deg;
+  }
+}
+
+@keyframes vs-shake {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  20%,
+  60% {
+    translate: -4px 0;
+  }
+  40%,
+  80% {
+    translate: 4px 0;
+  }
+}
+
+/*
+ * Scroll reveal. The `js` class is set by an inline script in the root layout,
+ * so content stays visible if JavaScript never runs. See RevealObserver.
+ */
+.js [data-reveal] {
+  opacity: 0;
+  translate: 0 32px;
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    translate var(--duration-reveal) var(--ease-out-expo);
+  transition-delay: calc(var(--reveal-index, 0) * var(--duration-stagger));
+}
+
+.js [data-reveal][data-inview="true"] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.js [data-reveal][data-inview="true"] [data-pop] {
+  animation: vs-pop 500ms var(--ease-spring) both;
+  animation-delay: calc(var(--reveal-index, 0) * var(--duration-stagger) + 150ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .skip-link {
     transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    translate: 0 0;
   }
 }
 
@@ -162,5 +399,10 @@ body {
   }
   html {
     @apply font-sans;
+    scroll-padding-top: 6rem;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
   }
 }

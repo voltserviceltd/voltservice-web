@@ -1,17 +1,22 @@
+import { cn } from "@/lib/utils";
+
 type CardProps = {
   children: React.ReactNode;
   className?: string;
-};
+  /** Lift on hover (cards that represent an item, not static notes). */
+  interactive?: boolean;
+} & Omit<React.ComponentProps<"div">, "children" | "className">;
 
-export function Card({ children, className }: CardProps) {
+/** Outlined "sticker" card with a hard shadow. */
+export function Card({ children, className, interactive = false, ...rest }: CardProps) {
   return (
     <div
-      className={[
-        "rounded-lg border border-border-subtle bg-surface p-6 transition-colors hover:border-accent-secondary",
+      className={cn(
+        "rounded-3xl border-2 border-line bg-surface p-7 shadow-hard",
+        interactive && "lift",
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
+      {...rest}
     >
       {children}
     </div>

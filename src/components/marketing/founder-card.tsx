@@ -11,15 +11,15 @@ export function FounderCard() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="flex w-full items-start gap-3 rounded-lg border border-border-subtle bg-surface p-4 text-left transition-colors hover:border-accent-secondary focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-accent-primary/40"
+          className="sticker flex w-full items-start gap-4 rounded-3xl border-2 border-line bg-surface p-4 text-left shadow-hard-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue"
         >
-          <span className="relative size-16 shrink-0 overflow-hidden rounded-lg bg-background-subtle">
+          <span className="relative size-18 shrink-0 -rotate-3 overflow-hidden rounded-[1rem] border-2 border-ink bg-pink">
             {founderContent.avatar ? (
               <Image
                 src={founderContent.avatar.src}
                 alt={founderContent.avatar.alt}
                 fill
-                sizes="64px"
+                sizes="72px"
                 className="object-cover"
               />
             ) : (
@@ -30,10 +30,10 @@ export function FounderCard() {
           </span>
 
           <span className="flex min-w-0 flex-col gap-1">
-            <span className="font-semibold text-text-primary">{founderContent.name}</span>
+            <span className="font-display text-lg font-extrabold text-text-primary">{founderContent.name}</span>
             <span className="text-sm text-text-muted">{founderContent.role}</span>
             <span className="text-sm text-text-muted">{founderContent.supportingLine}</span>
-            <span className="mt-1 text-sm font-medium text-accent-primary">
+            <span className="mt-1 w-fit bg-[linear-gradient(var(--color-volt),var(--color-volt))] bg-[length:100%_4px] bg-bottom bg-no-repeat pb-0.5 text-sm font-semibold text-text-primary">
               {founderContent.actionText}
             </span>
           </span>

@@ -1,5 +1,5 @@
 import type { StaticImageData } from "next/image";
-import founderAvatar from "@/assets/founder/babatunde-kalejaiye.png";
+import founderAvatar from "@/assets/founder/babatunde-kalejaiye.jpg";
 import linkedinIcon from "@/assets/social/linkedin.png";
 
 export type FounderLink = {

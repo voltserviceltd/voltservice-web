@@ -4,6 +4,8 @@ import type { ServiceItem } from "@/lib/content/domain/service-item";
 export const serviceItems: ServiceItem[] = [
   {
     title: "Business websites",
+    accent: "volt",
+    icon: "monitor",
     description:
       "We design and build clear, reliable websites that explain what your business does, help customers take action, and give your company a stronger digital presence.",
     deliverables: [
@@ -16,6 +18,8 @@ export const serviceItems: ServiceItem[] = [
   },
   {
     title: "Web applications",
+    accent: "coral",
+    icon: "app-window",
     description:
       "We build web applications that help businesses manage customers, data, content, workflows, and specialist processes.",
     deliverables: [
@@ -28,6 +32,8 @@ export const serviceItems: ServiceItem[] = [
   },
   {
     title: "Digital systems",
+    accent: "blue",
+    icon: "workflow",
     description:
       "We help businesses replace scattered spreadsheets, manual processes, and disconnected tools with systems that are easier to operate and maintain.",
     deliverables: [
@@ -40,6 +46,8 @@ export const serviceItems: ServiceItem[] = [
   },
   {
     title: "Product development",
+    accent: "lilac",
+    icon: "rocket",
     description:
       "For teams building a digital product, VoltService can support planning, prototyping, development, release, and iteration.",
     deliverables: [
@@ -52,6 +60,8 @@ export const serviceItems: ServiceItem[] = [
   },
   {
     title: "Support and improvement",
+    accent: "mint",
+    icon: "life-buoy",
     description:
       "Software needs to stay useful after launch. We support existing websites and applications with fixes, improvements, maintenance, and technical guidance.",
     deliverables: [
