@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { SiteLayoutContent } from "@/components/layout/site-layout-content";
 import { clientEnv } from "@/lib/env/env";
 import { buildOrganizationJsonLd } from "@/lib/seo/organization-json-ld";
@@ -8,15 +8,25 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const bricolageGrotesque = Bricolage_Grotesque({
+  variable: "--font-bricolage-grotesque",
   subsets: ["latin"],
+  weight: ["700", "800"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -29,6 +39,10 @@ export const metadata: Metadata = {
     "VoltService Ltd designs and develops reliable websites, applications, and digital systems that help businesses improve operations, serve customers, and grow with confidence.",
 };
 
+// Marks the document as JS-capable before first paint, so scroll reveals
+// (see RevealObserver) never hide content for visitors without JavaScript.
+const jsFlagScript = "document.documentElement.classList.add('js')";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,11 +50,18 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       suppressHydrationWarning
-      className={cn("h-full", "antialiased", ibmPlexSans.variable, spaceGrotesk.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        instrumentSans.variable,
+        bricolageGrotesque.variable,
+        jetbrainsMono.variable,
+      )}
     >
       <body className="flex min-h-full flex-col">
+        <script dangerouslySetInnerHTML={{ __html: jsFlagScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

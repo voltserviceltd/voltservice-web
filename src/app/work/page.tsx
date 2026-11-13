@@ -13,13 +13,13 @@ export default function WorkPage() {
   return (
     <>
       <PageSection>
-        <SectionHeader {...workContent.header} />
+        <SectionHeader {...workContent.header} eyebrowTone="blue" as="h1" />
       </PageSection>
 
-      <PageSection subtle>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {projectItems.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+      <PageSection flushTop>
+        <div className="flex flex-col gap-10">
+          {projectItems.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} withScreenshots />
           ))}
         </div>
       </PageSection>

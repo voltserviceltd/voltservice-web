@@ -8,6 +8,9 @@ export const homeContent = {
   },
   hero: {
     title: "Software services built around your business.",
+    // Display split: the highlight renders inside the volt "sticker" pill.
+    titleLead: "Software services built around",
+    titleHighlight: "your business.",
     subtitle:
       "VoltService Ltd designs and develops reliable websites, applications, and digital systems that help businesses improve operations, serve customers, and grow with confidence.",
     primaryLabel: "Start a project",
@@ -15,6 +18,21 @@ export const homeContent = {
     secondaryLabel: "View our work",
     secondaryHref: "/work",
     badges: ["Business websites", "Web applications", "Digital systems", "Ongoing support"],
+  },
+  marquee: {
+    label: "What we build",
+    items: [
+      "Business websites",
+      "Web applications",
+      "Digital systems",
+      "Product development",
+      "Integrations",
+      "Ongoing support",
+    ],
+  },
+  founderSection: {
+    eyebrow: "Who you'll work with",
+    title: "A direct line to the person building it.",
   },
   valueSection: {
     eyebrow: "Why VoltService",

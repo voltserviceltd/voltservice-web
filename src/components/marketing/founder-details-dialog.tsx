@@ -31,7 +31,7 @@ export function FounderDetailsDialog() {
       </div>
 
       {validLinks.length > 0 && (
-        <div className="flex flex-wrap gap-4 border-t border-border-subtle pt-4">
+        <div className="flex flex-wrap gap-5 border-t-2 border-border-subtle pt-4">
           {validLinks.map((link) =>
             link.href.startsWith("https://") ? (
               <a
@@ -39,7 +39,7 @@ export function FounderDetailsDialog() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary hover:underline"
+                className="inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-volt),var(--color-volt))] bg-[length:100%_3px] bg-bottom bg-no-repeat pb-0.5 text-sm font-semibold text-text-primary"
               >
                 <FounderLinkIcon icon={link.icon} />
                 {link.label}
@@ -48,7 +48,7 @@ export function FounderDetailsDialog() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary hover:underline"
+                className="inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-volt),var(--color-volt))] bg-[length:100%_3px] bg-bottom bg-no-repeat pb-0.5 text-sm font-semibold text-text-primary"
               >
                 <FounderLinkIcon icon={link.icon} />
                 {link.label}

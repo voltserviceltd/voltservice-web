@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "VoltService Ltd designs and develops reliable websites, applications, and digital systems for businesses that need practical software support.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#284b63",
+    background_color: "#fff7e8",
+    theme_color: "#ffd60a",
     icons: [
       {
         src: "/apple-icon.png",
