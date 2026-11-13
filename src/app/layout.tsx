@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteLayoutContent } from "@/components/layout/site-layout-content";
 import { clientEnv } from "@/lib/env/env";
 import { buildOrganizationJsonLd } from "@/lib/seo/organization-json-ld";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -54,9 +53,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <SiteLayoutContent>{children}</SiteLayoutContent>
           <Toaster />
         </ThemeProvider>
       </body>
