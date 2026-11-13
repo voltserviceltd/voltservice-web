@@ -1,0 +1,36 @@
+/* Figma component: Text link. Volt underline that grows into a highlight. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: fit-content;
+  padding: 0.125rem 0.125rem 0.25rem;
+  font-weight: 600;
+  background-image: linear-gradient(var(--color-volt), var(--color-volt));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 4px;
+  transition: background-size var(--duration-base) var(--ease-out-expo);
+}
+
+.link:hover {
+  background-size: 100% 100%;
+}
+
+.icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: translate var(--duration-base) var(--ease-out-expo);
+}
+
+.link:hover .icon {
+  translate: 2px -2px;
+}
+
+.onDark {
+  color: var(--color-paper);
+}
+
+.onDark:hover {
+  color: var(--color-ink);
+}

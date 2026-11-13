@@ -1,0 +1,133 @@
+/*
+ * VoltService motion. See Figma page "Motion spec" for the full inventory.
+ * Rules: animate transform and opacity only; loops stay in decorative areas;
+ * everything degrades to a short fade under prefers-reduced-motion.
+ */
+
+@keyframes vs-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes vs-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes vs-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes vs-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes vs-pop {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+    rotate: 0deg;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    rotate: var(--pop-rotate, 0deg);
+  }
+}
+
+@keyframes vs-rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes vs-fill {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes vs-wiggle {
+  0%,
+  100% {
+    rotate: -6deg;
+  }
+  33% {
+    rotate: 6deg;
+  }
+  66% {
+    rotate: -3deg;
+  }
+}
+
+@keyframes vs-shake {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  20%,
+  60% {
+    translate: -4px 0;
+  }
+  40%,
+  80% {
+    translate: 4px 0;
+  }
+}
+
+/*
+ * Scroll reveal. The `js` class is set by an inline script in the root layout,
+ * so content stays visible if JavaScript never runs.
+ */
+.js [data-reveal] {
+  opacity: 0;
+  translate: 0 32px;
+  transition:
+    opacity var(--duration-reveal) var(--ease-out-expo),
+    translate var(--duration-reveal) var(--ease-out-expo);
+  transition-delay: calc(var(--reveal-index, 0) * var(--duration-stagger));
+}
+
+.js [data-reveal][data-inview="true"] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    translate: 0 0;
+  }
+}

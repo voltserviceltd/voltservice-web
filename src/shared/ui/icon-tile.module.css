@@ -1,0 +1,36 @@
+/* Figma component: Icon tile (Color, Icon). The coloured-icon pattern. */
+.tile {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border: var(--outline);
+  border-radius: calc(var(--tile-size) * 0.25);
+  box-shadow: var(--shadow-hard-sm);
+  color: var(--color-ink);
+  rotate: var(--tile-tilt, 0deg);
+  transition: rotate var(--duration-base) var(--ease-spring);
+}
+
+.icon {
+  width: calc(var(--tile-size) * 0.47);
+  height: calc(var(--tile-size) * 0.47);
+}
+
+.sm { --tile-size: 2.5rem; }
+.md { --tile-size: 4rem; }
+.lg { --tile-size: 6rem; }
+
+.volt { background: var(--color-volt); }
+.coral { background: var(--color-coral); }
+.blue { background: var(--color-blue); }
+.mint { background: var(--color-mint); }
+.lilac { background: var(--color-lilac); }
+.pink { background: var(--color-pink); }
+.paper { background: var(--color-paper-deep); }
+
+/* Parent cards opt in with data-tilt-host to tilt the tile on hover. */
+:global([data-tilt-host]:hover) .tile {
+  rotate: -6deg;
+}

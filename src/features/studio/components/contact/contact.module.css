@@ -1,0 +1,101 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-48);
+}
+
+.formCard {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border: var(--outline);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+}
+
+.submitRow {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-12);
+}
+
+.note {
+  color: var(--color-text-soft);
+  font-size: var(--text-body-s);
+}
+
+.ready {
+  padding: var(--space-16) var(--space-24);
+  border: var(--outline);
+  border-radius: var(--radius-md);
+  background: var(--color-mint);
+}
+
+.ready a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.aside {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.asideCard {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-12);
+  padding: var(--space-32);
+  border: var(--outline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+}
+
+.asideTitle {
+  font-size: var(--text-h3);
+}
+
+.email {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.expect {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.expect li {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.expect svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 900px) {
+  .layout,
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

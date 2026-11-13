@@ -3,49 +3,40 @@
 @import "../shared/ui/tokens/colors.css";
 @import "../shared/ui/tokens/typography.css";
 @import "../shared/ui/tokens/primitives.css";
+@import "../shared/ui/tokens/motion.css";
 
+/* Bridge VoltService tokens into Tailwind / shadcn semantic names. */
 @theme inline {
   --font-sans: var(--font-body);
-  --font-serif: var(--font-display);
-  --color-background: var(--color-bg-primary);
-  --color-foreground: var(--color-text-primary);
-  --color-card: var(--color-surface-primary);
-  --color-card-foreground: var(--color-text-primary);
-  --color-popover: var(--color-surface-primary);
-  --color-popover-foreground: var(--color-text-primary);
-  --color-primary: var(--color-btn-primary-bg);
-  --color-primary-foreground: var(--color-btn-primary-fg);
-  --color-secondary: var(--color-btn-secondary-bg);
-  --color-secondary-foreground: var(--color-btn-secondary-fg);
-  --color-muted: var(--color-bg-secondary);
-  --color-muted-foreground: var(--color-text-secondary);
-  --color-accent: var(--color-fill-selected);
-  --color-accent-foreground: var(--color-text-primary);
-  --color-destructive: var(--color-error);
-  --color-border: var(--color-border-default);
-  --color-input: var(--color-border-default);
-  --color-ring: var(--color-accent-blue);
-}
-
-/* Semantic aliases — component-level variables mapped to Voltservice tokens */
-:root {
-  --background: var(--color-bg-primary);
-  --foreground: var(--color-text-primary);
-  --muted: var(--color-text-tertiary);
-  --muted-strong: var(--color-text-secondary);
-  --surface-muted: var(--color-bg-secondary);
-  --surface-accent: var(--color-surface-accent);
-  --surface-strong: var(--color-ink);
-  --surface-light: var(--color-white);
-  --line-soft: var(--color-border-subtle);
-  --accent: var(--color-accent-blue);
-  --accent-soft: var(--color-accent-blue);
-  --accent-warm: var(--color-text-link);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text);
+  --color-primary: var(--color-volt);
+  --color-primary-foreground: var(--color-ink);
+  --color-secondary: var(--color-white);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-paper-deep);
+  --color-muted-foreground: var(--color-ink-soft);
+  --color-accent: var(--color-paper-deep);
+  --color-accent-foreground: var(--color-ink);
+  --color-destructive: var(--color-coral);
+  --color-border: var(--color-ink);
+  --color-input: var(--color-ink);
+  --color-ring: var(--color-blue);
+  --shadow-hard-sm: var(--shadow-hard-sm);
+  --shadow-hard: var(--shadow-hard);
+  --shadow-hard-lg: var(--shadow-hard-lg);
 }
 
 html {
-  height: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
@@ -55,20 +46,40 @@ body {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-text);
+  background: var(--color-bg);
   font-family: var(--font-body);
+  font-size: var(--text-body-m);
+  line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
@@ -77,5 +88,22 @@ a {
 }
 
 img {
+  display: block;
   max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--color-volt);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 3px;
 }

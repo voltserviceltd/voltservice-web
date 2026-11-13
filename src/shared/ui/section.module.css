@@ -1,0 +1,20 @@
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+  padding-inline: var(--gutter);
+}
+
+.paper { background: var(--color-paper); }
+.deep { background: var(--color-paper-deep); }
+.white { background: var(--color-white); }
+.ink { background: var(--color-ink); color: var(--color-paper); }
+
+.bordered {
+  border-block: var(--outline);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}

@@ -1,6 +1,9 @@
-import { contactDetails, navigation } from "../content/content";
+import { RevealObserver } from "@/shared/ui/reveal-observer";
+
+import { navigation } from "../content/content";
 import { SiteNavbar } from "../navbar/site-navbar";
-import styles from "./studio-page.module.css";
+import { SiteFooter } from "./site-footer";
+import styles from "./studio-shell.module.css";
 
 export function StudioShell({ children }: { children: React.ReactNode }) {
   return (
@@ -9,27 +12,14 @@ export function StudioShell({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
 
-      <SiteNavbar
-        contactEmail={contactDetails.email}
-        domain={contactDetails.domain}
-        items={navigation}
-      />
+      <SiteNavbar items={navigation} />
 
-      <main id="main">{children}</main>
+      <main className={styles.main} id="main" tabIndex={-1}>
+        {children}
+      </main>
 
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <div>
-            <p className={styles.footerTitle}>VOLTSERVICE LTD</p>
-            <p className={styles.footerText}>
-              Modern digital products for web, cloud, and high-trust systems.
-            </p>
-          </div>
-
-          <p className={styles.footerText}>{contactDetails.domain}</p>
-        </div>
-      </footer>
+      <SiteFooter />
+      <RevealObserver />
     </div>
   );
 }
-

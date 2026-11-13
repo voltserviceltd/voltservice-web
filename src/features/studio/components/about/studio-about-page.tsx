@@ -1,64 +1,58 @@
+import { siteConfig } from "@/shared/config/site";
+import { Section } from "@/shared/ui/section";
 import { SectionHeading } from "@/shared/ui/section-heading";
+import { TextLink } from "@/shared/ui/text-link";
 
-import { founderProfile, principles } from "../content/content";
-import { PageHero } from "../shared/page-hero";
+import { CtaBand } from "../blocks/cta-band";
+import { FounderBlock } from "../blocks/founder-block";
+import { PageHero } from "../blocks/page-hero";
 import { StudioShell } from "../shared/studio-shell";
-import styles from "../shared/studio-page.module.css";
+import styles from "./about.module.css";
+
+const { legal } = siteConfig;
+
+const details = [
+  ["Company name", legal.name],
+  ["Company number", legal.companyNumber],
+  ["Registered in", legal.jurisdiction],
+  ["Registered office", legal.registeredOffice],
+  ["Contact", siteConfig.contactEmail],
+] as const;
 
 export function StudioAboutPage() {
   return (
     <StudioShell>
       <PageHero
         eyebrow="About"
-        title="Founder-led product work for high-trust systems."
-        summary="A focused studio for public product presence, fintech flows, and maintainable web and app delivery."
+        summary="A software services company focused on practical digital delivery — founded and led by Babatunde Kalejaiye."
+        title="About VoltService."
       />
 
-      <section className={`${styles.section} ${styles.sectionMuted}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.founderLayout}>
-            <div className={styles.founderIntro}>
-              <p className={styles.founderEyebrow}>
-                {founderProfile.eyebrow}
-              </p>
-              <h2 className={styles.founderTitle}>{founderProfile.title}</h2>
+      <Section style={{ paddingTop: 0 }}>
+        <FounderBlock />
+      </Section>
+
+      <Section bordered tone="deep">
+        <SectionHeading
+          description="The details you'd expect from a company you're about to work with."
+          eyebrow="Company details"
+          eyebrowTone="ink"
+          title="A registered UK company."
+        />
+        <dl className={styles.details}>
+          {details.map(([term, value]) => (
+            <div className={styles.detail} key={term}>
+              <dt>{term}</dt>
+              <dd>{value}</dd>
             </div>
+          ))}
+        </dl>
+        <p className={styles.verify}>
+          <TextLink href={legal.companiesHouseUrl}>Check our Companies House record</TextLink>
+        </p>
+      </Section>
 
-            <div className={styles.founderCopy}>
-              <div>
-                <p className={styles.founderName}>{founderProfile.name}</p>
-                <p className={styles.founderRole}>{founderProfile.role}</p>
-              </div>
-              <p>{founderProfile.summary}</p>
-              <ul className={styles.founderList}>
-                {founderProfile.details.map((detail) => (
-                  <li key={detail}>{detail}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <SectionHeading
-            description="Boundaries, documentation, and quality checks stay visible because they are part of the product experience."
-            eyebrow="Principles"
-            title="The engineering bar stays visible."
-          />
-
-          <div className={styles.principlesGrid}>
-            {principles.map((item) => (
-              <article className={styles.principleCard} key={item.title}>
-                <h3 className={styles.principleTitle}>{item.title}</h3>
-                <p className={styles.principleSummary}>{item.summary}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CtaBand />
     </StudioShell>
   );
 }
-

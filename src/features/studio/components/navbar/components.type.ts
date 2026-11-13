@@ -1,13 +1,7 @@
+import type { NavItem } from "../../features.type";
 
-import type { Route } from "next";
-
-export type NavItem = {
-  label: string;
-  href: Route;
-};
+export type { NavItem };
 
 export type SiteNavbarProps = {
-  contactEmail: string;
-  domain: string;
   items: NavItem[];
 };

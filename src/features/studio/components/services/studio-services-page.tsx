@@ -1,32 +1,47 @@
-import { capabilities } from "../content/content";
-import { ContactPanel } from "../shared/contact-panel";
-import { PageHero } from "../shared/page-hero";
+import { Section } from "@/shared/ui/section";
+import { SectionHeading } from "@/shared/ui/section-heading";
+
+import blocks from "../blocks/blocks.module.css";
+import { CtaBand } from "../blocks/cta-band";
+import { PageHero } from "../blocks/page-hero";
+import { ServiceCard } from "../blocks/service-card";
+import { StepCard } from "../blocks/step-card";
+import { processSteps, services } from "../content/content";
 import { StudioShell } from "../shared/studio-shell";
-import styles from "../shared/studio-page.module.css";
 
 export function StudioServicesPage() {
   return (
     <StudioShell>
       <PageHero
         eyebrow="Services"
-        title="Focused product, web, mobile, and cloud delivery."
-        summary="A practical studio offer for teams that need clearer product surfaces, stronger trust flows, and release-ready builds."
+        eyebrowTone="coral"
+        summary="Websites, apps, internal tools and the care that keeps them running. Start with one, add the others when they're worth it."
+        title="Four ways we take work off your plate."
       />
 
-      <section className={`${styles.section} ${styles.sectionAccent}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.servicesGrid}>
-            {capabilities.map((item) => (
-              <article className={styles.serviceCard} key={item.title}>
-                <h3 className={styles.serviceTitle}>{item.title}</h3>
-                <p className={styles.serviceSummary}>{item.summary}</p>
-              </article>
-            ))}
-          </div>
+      <Section style={{ paddingTop: 0 }}>
+        <div className={`${blocks.cardGrid} ${blocks.cardGridWide}`} style={{ marginTop: 0 }}>
+          {services.map((item, index) => (
+            <ServiceCard index={index % 2} item={item} key={item.slug} showExamples />
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <ContactPanel />
+      <Section bordered tone="deep">
+        <SectionHeading
+          description="Each stage has a written scope and a fixed price you agree before work starts. If the scope changes, we agree the change in writing first."
+          eyebrow="How pricing works"
+          eyebrowTone="blue"
+          title="Fixed-price stages, not open-ended hours."
+        />
+        <ol className={blocks.steps}>
+          {processSteps.map((step, index) => (
+            <StepCard index={index} key={step.number} step={step} />
+          ))}
+        </ol>
+      </Section>
+
+      <CtaBand />
     </StudioShell>
   );
 }

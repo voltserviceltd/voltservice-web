@@ -1,132 +1,80 @@
-import Image from "next/image";
-import Link from "next/link";
-
+import { Marquee } from "@/shared/ui/marquee";
+import { Section } from "@/shared/ui/section";
 import { SectionHeading } from "@/shared/ui/section-heading";
+import { TextLink } from "@/shared/ui/text-link";
 
-import {
-  capabilities,
-  portfolio,
-  proofItems,
-} from "../content/content";
-import { ContactPanel } from "../shared/contact-panel";
-import { ProductCard } from "../shared/product-card";
+import blocks from "../blocks/blocks.module.css";
+import { CtaBand } from "../blocks/cta-band";
+import { FounderBlock } from "../blocks/founder-block";
+import { ProductCard } from "../blocks/product-card";
+import { ResearchStrip } from "../blocks/research-strip";
+import { ServiceCard } from "../blocks/service-card";
+import { StepCard } from "../blocks/step-card";
+import { marqueeItems, processSteps, products, services } from "../content/content";
 import { StudioShell } from "../shared/studio-shell";
-import styles from "../shared/studio-page.module.css";
+import { Hero } from "./hero";
 
 export function StudioHome() {
-  const featuredProducts = portfolio.slice(0, 2);
-
   return (
     <StudioShell>
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <p className={styles.heroEyebrow}>Voltservice product studio</p>
-            <h1 className={styles.heroTitle}>
-              Build the product moments that matter.
-            </h1>
-            <p className={styles.heroSummary}>
-              We shape web, mobile, cloud, and fintech products into clear
-              public stories backed by real shipped work.
-            </p>
+      <Hero />
 
-            <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} href="/products">
-                View Products
-              </Link>
-              <Link className={styles.secondaryAction} href="/contact">
-                Start a Project
-              </Link>
-            </div>
-          </div>
+      <Marquee items={marqueeItems} label="What we build" />
 
-          <div className={styles.heroVisual} aria-hidden="true">
-            <Image
-              alt=""
-              className={styles.heroProduct}
-              height={1080}
-              priority
-              src="/brand/paysmart/hero.png"
-              width={1514}
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.productTabs} aria-label="Product channels">
-        <div className={styles.productTabsInner}>
-          {portfolio.map((item) => (
-            <Link className={styles.productTab} href="/products" key={item.name}>
-              <span>{item.name}</span>
-            </Link>
+      <Section aria-labelledby="services-title">
+        <SectionHeading
+          aside="Most projects start small — one fiddly process, one tired website — and grow from there. We work in clear, fixed-price stages so you always know what's next."
+          eyebrow="What we do"
+          eyebrowTone="coral"
+          title={<span id="services-title">Four ways we take work off your plate.</span>}
+        />
+        <div className={blocks.cardGrid}>
+          {services.map((item, index) => (
+            <ServiceCard index={index} item={item} key={item.slug} />
           ))}
         </div>
-      </section>
+      </Section>
 
-      <section className={`${styles.section} ${styles.sectionMuted}`}>
-        <div className={styles.sectionInner}>
-          <SectionHeading
-            description="A focused entry point for the company, with clear routes into products, services, approach, and contact."
-            eyebrow="Positioning"
-            title="A sharper front door for product work."
-          />
-
-          <div className={styles.proofGrid}>
-            {proofItems.map((item) => (
-              <article className={styles.proofItem} key={item.label}>
-                <p className={styles.proofLabel}>{item.label}</p>
-                <p className={styles.proofValue}>{item.value}</p>
-              </article>
-            ))}
-          </div>
+      <Section aria-labelledby="work-title" bordered tone="deep">
+        <SectionHeading
+          description="Running live products keeps us honest: we deal with real users, real payments and real support — the same things your project will face."
+          eyebrow="Our own products"
+          eyebrowTone="blue"
+          title={<span id="work-title">We don&apos;t just build for clients. We run our own.</span>}
+        />
+        <div className={blocks.productList}>
+          {products.map((item, index) => (
+            <ProductCard index={index} item={item} key={item.name} />
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.splitHeading}>
-            <SectionHeading
-              description="A quick preview of shipped and concept work, with the full portfolio available on its own page."
-              eyebrow="Featured work"
-              title="Selected product proof."
-            />
-            <Link className={styles.textAction} href="/products">
-              All Products
-            </Link>
-          </div>
+      <Section aria-labelledby="process-title">
+        <SectionHeading
+          description="Every project follows the same four steps, with a written scope and price agreed before we write any code."
+          eyebrow="How we work"
+          eyebrowTone="mint"
+          title={<span id="process-title">Small steps. No surprises.</span>}
+        />
+        <ol className={blocks.steps}>
+          {processSteps.map((step, index) => (
+            <StepCard index={index} key={step.number} step={step} />
+          ))}
+        </ol>
+        <p style={{ marginTop: "var(--space-48)" }}>
+          <TextLink href="/how-we-work">More on how we work</TextLink>
+        </p>
+      </Section>
 
-          <div className={styles.productGrid}>
-            {featuredProducts.map((item) => (
-              <ProductCard item={item} key={item.name} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <Section aria-label="What we're working on now" style={{ paddingTop: 0 }}>
+        <ResearchStrip />
+      </Section>
 
-      <section className={`${styles.section} ${styles.sectionAccent}`}>
-        <div className={styles.sectionInner}>
-          <SectionHeading
-            description="Product websites, fintech flows, app surfaces, and release discipline shaped as one coherent delivery practice."
-            eyebrow="Studio"
-            title="Hire Voltservice for focused product work."
-          />
+      <Section aria-label="Who you'll work with" bordered tone="white">
+        <FounderBlock />
+      </Section>
 
-          <div className={styles.servicesGrid}>
-            {capabilities.map((item) => (
-              <article className={styles.serviceCard} key={item.title}>
-                <h3 className={styles.serviceTitle}>{item.title}</h3>
-                <p className={styles.serviceSummary}>{item.summary}</p>
-              </article>
-            ))}
-          </div>
-
-          <Link className={styles.primaryActionInline} href="/services">
-            Explore Services
-          </Link>
-        </div>
-      </section>
-
-      <ContactPanel />
+      <CtaBand />
     </StudioShell>
   );
 }

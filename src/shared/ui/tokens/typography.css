@@ -1,52 +1,34 @@
-/* BuildersHub typography tokens (DSTypographyTokens — Editorial mode) */
-/* Editorial: Serif for display/headings, SansSerif for body */
+/*
+ * VoltService type tokens. Mirrors the Figma text styles.
+ * Display: Bricolage Grotesque · Body: Instrument Sans · Labels: JetBrains Mono.
+ * Desktop sizes come from Figma; clamp() interpolates down to the Mobile/* styles at 390px.
+ */
 :root {
-  /* Font families — populated by next/font variables in layout.tsx */
-  --font-display: var(--font-playfair, Georgia, 'Times New Roman', serif);
-  --font-body: var(--font-inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+  --font-display: var(--font-bricolage), "Arial Black", system-ui, sans-serif;
+  --font-body: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Type scale — font sizes (sp → rem, 1sp ≈ 1px at 16px base) */
-  --text-display: 3.25rem;    /* 52sp */
-  --text-h1: 2rem;            /* 32sp */
-  --text-h2: 1.75rem;         /* 28sp */
-  --text-h3: 1.5rem;          /* 24sp */
-  --text-h4: 1.25rem;         /* 20sp */
-  --text-h5: 1rem;            /* 16sp */
-  --text-label-lg: 1.125rem;  /* 18sp */
-  --text-body-lg: 1rem;       /* 16sp */
-  --text-body-md: 0.9375rem;  /* 15sp */
-  --text-body-sm: 0.8125rem;  /* 13sp */
-  --text-caption: 0.75rem;    /* 12sp */
-  --text-label-md: 0.75rem;   /* 12sp */
-  --text-label-sm: 0.6875rem; /* 11sp */
+  /* Display/XL 80 → Mobile/Display 50 */
+  --text-display-xl: clamp(3.125rem, 2.2rem + 3.8vw, 5rem);
+  /* Display/L 72 → 44 */
+  --text-display-l: clamp(2.75rem, 1.9rem + 3.5vw, 4.5rem);
+  /* Heading/H2 52 → Mobile/H2 36 */
+  --text-h2: clamp(2.25rem, 1.8rem + 1.9vw, 3.25rem);
+  --text-h3: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
+  --text-h4: 1.375rem;
+  /* Body/L 20 → Mobile/Body L 18 */
+  --text-body-l: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --text-body-m: 1.0625rem;
+  --text-body-s: 0.9375rem;
+  --text-button: 1rem;
+  --text-label: 0.8125rem;
 
-  /* Line heights (unitless ratio) */
-  --leading-display: 1.154;   /* 60/52 */
-  --leading-h1: 1.188;        /* 38/32 */
-  --leading-h2: 1.214;        /* 34/28 */
-  --leading-h3: 1.25;         /* 30/24 */
-  --leading-h4: 1.35;         /* 27/20 */
-  --leading-h5: 1.375;        /* 22/16 */
-  --leading-label-lg: 1.111;  /* 20/18 */
-  --leading-body-lg: 1.5625;  /* 25/16 */
-  --leading-body-md: 1.533;   /* 23/15 */
-  --leading-body-sm: 1.462;   /* 19/13 */
-  --leading-caption: 1.333;   /* 16/12 */
-  --leading-label-md: 1.417;  /* 17/12 */
-  --leading-label-sm: 1.273;  /* 14/11 */
+  --leading-display: 0.95;
+  --leading-heading: 1.05;
+  --leading-tight: 1.2;
+  --leading-body: 1.55;
 
-  /* Letter spacing */
-  --tracking-display: -0.012em;  /* -0.6sp / 52px */
-  --tracking-h1: -0.006em;       /* -0.2sp / 32px */
-  --tracking-normal: 0;
-  --tracking-body: 0.0125em;     /* 0.2sp / 16px */
-  --tracking-caption: 0.025em;   /* 0.3sp / 12px */
-  --tracking-label: 0.017em;     /* 0.2sp / 12px */
-
-  /* Font weights */
-  --weight-black: 900;
-  --weight-bold: 700;
-  --weight-semibold: 600;
-  --weight-medium: 500;
-  --weight-normal: 400;
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.015em;
+  --tracking-label: 0.08em;
 }

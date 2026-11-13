@@ -1,0 +1,29 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1;
+  outline: none;
+}
+
+.skipLink {
+  position: fixed;
+  top: var(--space-16);
+  left: var(--space-16);
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border: var(--outline);
+  border-radius: var(--radius-pill);
+  background: var(--color-volt);
+  font-weight: 600;
+  box-shadow: var(--shadow-hard-sm);
+  translate: 0 -200%;
+  transition: translate var(--duration-base) var(--ease-out-expo);
+}
+
+.skipLink:focus-visible {
+  translate: 0 0;
+}

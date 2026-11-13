@@ -1,0 +1,80 @@
+/* Figma component: Marquee band. */
+.band {
+  position: relative;
+  overflow: hidden;
+  border-block: var(--outline);
+  background: var(--color-blue);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: vs-marquee 40s linear infinite;
+}
+
+.band:hover .track,
+.paused .track {
+  animation-play-state: paused;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1.25rem 0.875rem;
+}
+
+.item {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.2vw, 2.125rem);
+  font-weight: 800;
+  letter-spacing: var(--tracking-heading);
+  white-space: nowrap;
+  color: var(--color-white);
+}
+
+.item:nth-child(4n + 3) {
+  color: var(--color-volt);
+}
+
+.star {
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--color-volt);
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: var(--space-16);
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: var(--outline);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-hard-sm);
+  cursor: pointer;
+}
+
+.toggle svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band {
+    overflow-x: auto;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .toggle {
+    display: none;
+  }
+}

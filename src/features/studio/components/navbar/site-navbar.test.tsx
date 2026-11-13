@@ -1,33 +1,21 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 
+import { navigation } from "../content/content";
 import { SiteNavbar } from "./site-navbar";
 
-const items = [
-  { label: "Products", href: "/products" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-] as const;
-
 describe("SiteNavbar", () => {
-  it("renders the shared navigation items and contact actions", () => {
-    render(
-      <SiteNavbar
-        contactEmail="voltservice@metalbrain.net"
-        domain="metalbrain.net"
-        items={[...items]}
-      />,
-    );
+  it("renders the main navigation, contact link and primary action", () => {
+    render(<SiteNavbar items={navigation} />);
 
-    expect(screen.getByText("VOLTSERVICE LTD")).toBeInTheDocument();
-    expect(screen.getByText("metalbrain.net")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /open navigation/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /voltservice home/i })).toHaveAttribute("href", "/");
 
-    expect(screen.getAllByRole("link", { name: "Products" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "About" }).length).toBeGreaterThan(0);
-    expect(
-      screen.getAllByRole("link", { name: /start a project/i })[0],
-    ).toHaveAttribute("href", "mailto:voltservice@metalbrain.net");
+    const main = screen.getByRole("navigation", { name: "Main" });
+    for (const item of navigation) {
+      expect(within(main).getByRole("link", { name: item.label })).toHaveAttribute("href", item.href);
+    }
+
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: /start a project/i })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("button", { name: /open menu/i })).toBeInTheDocument();
   });
 });

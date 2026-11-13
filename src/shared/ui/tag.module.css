@@ -1,0 +1,54 @@
+/* Figma component: Tag (Tone, Show dot). */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.4375rem 0.75rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.volt { background: var(--color-volt); }
+.coral { background: var(--color-coral); }
+.blue { background: var(--color-blue); color: var(--color-white); }
+.mint { background: var(--color-mint); }
+.lilac { background: var(--color-lilac); }
+.pink { background: var(--color-pink); }
+.paper { background: var(--color-paper-deep); }
+.outline { background: var(--color-white); }
+.ink { background: var(--color-ink); color: var(--color-paper); }
+
+.dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-mint);
+}
+
+.mint .dot {
+  background: var(--color-ink);
+}
+
+.ink .dot {
+  border-color: var(--color-paper);
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  background: inherit;
+  animation: vs-pulse-ring 1.6s var(--ease-in-out) infinite;
+}
